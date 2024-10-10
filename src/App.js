@@ -1,25 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+
+function App(){
+  const [posts, setPosts] = useState([]);
+
+  useEffect(()=>{
+    axios.get('https://twosailorsbartending.ca/wp-json/wp/v2/posts')
+    .then(response=>{
+      setPosts(response.data);
+    })
+    .catch(error => {
+      console.error('Error fetching posts: ', error);
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1> Two Sailors Bartending</h1>
+      <h2> Blog Posts</h2>
+      {posts.length > 0 ? (
+        posts.map(post =>(
+          <div key={post.id}>
+            <h3>{post.title.rendered}</h3>
+            <div dangerouslySetInnerHTML={{__html: post.content.rendered}} />
+          </div>
+        ))
+      ) : (
+        <p>Loading posts...</p>
+      )}
     </div>
   );
-}
 
+}
+    
 export default App;
