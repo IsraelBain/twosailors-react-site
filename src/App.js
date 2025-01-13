@@ -1,37 +1,26 @@
-
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LandingPage from "./pages/LandingPage";
+import AboutUs from "./pages/AboutUs";
+import Blog from "./pages/Blog";
+import ThankYou from "./pages/ThankYou";
+import Navbar from "./components/Navbar"; // Import your Navbar component
 
 function App(){
-  const [posts, setPosts] = useState([]);
+  return(
+    <Router>
+      {/* Use Navbar component */}
+      <Navbar />
 
-  useEffect(()=>{
-    axios.get('https://twosailorsbartending.ca/wp-json/wp/v2/posts')
-    .then(response=>{
-      setPosts(response.data);
-    })
-    .catch(error => {
-      console.error('Error fetching posts: ', error);
-    });
-  }, []);
-
-  return (
-    <div>
-      <h1> Two Sailors Bartending</h1>
-      <h2> Blog Posts</h2>
-      {posts.length > 0 ? (
-        posts.map(post =>(
-          <div key={post.id}>
-            <h3>{post.title.rendered}</h3>
-            <div dangerouslySetInnerHTML={{__html: post.content.rendered}} />
-          </div>
-        ))
-      ) : (
-        <p>Loading posts...</p>
-      )}
-    </div>
+      {/* Routes */}
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/thank-you" element={<ThankYou />} />
+      </Routes>
+    </Router>
   );
+};
 
-}
-    
 export default App;
