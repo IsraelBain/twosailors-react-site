@@ -6,12 +6,13 @@ const Navbar = () => {
   return (
     <nav className="bg-blue-900 text-white fixed top-0 w-full z-50 flex justify-between items-center px-10 py-4 font-sans">
 
-      {/* Logo */}
-      <img src={logo} alt="Two Sailors Bartending Logo" className="h-24 w-36" />
+      {/* Clickable Logo */}
+      <Link to="/" className="flex items-center">
+        <img src={logo} alt="Two Sailors Bartending Logo" className="h-24 w-36 cursor-pointer" />
+      </Link>
 
       {/* Navigation Links */}
       <ul className="nav-links flex gap-6 text-lg font-semibold tracking-wide font-sans">
-
         <li>
           <Link to="/" className="hover:text-orange-500 text-lg font-sans">
             Home

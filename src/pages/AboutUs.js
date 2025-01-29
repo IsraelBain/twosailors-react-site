@@ -23,7 +23,7 @@ const AboutUs = () => {
         </div>
 
         {/* About Us Section */}
-        <div className="text-center max-w-4xl">
+        <div className="text-center max-w-xl mb-7">
           <h1 className="text-6xl font-bold text-gray text-center font-serif leading-tight tracking-wide">About Us</h1>
 
           <div className="flex flex-wrap justify-center gap-12">

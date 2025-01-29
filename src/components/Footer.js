@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion"; // Import Framer Motion
 
 // Import drink images
 import coldcock from "../assets/coldcock.jpg";
@@ -7,18 +8,33 @@ import applecock from "../assets/applecock.jpg";
 import comfortcock from "../assets/comfortcock.jpg";
 import sirenacock from "../assets/sirenacock.jpeg";
 
+const images = [coldcock, bluecock, applecock, comfortcock, sirenacock];
+
 const Footer = () => {
   return (
-    <footer className="flex justify-center items-center gap-8 py-6 bg-blue-900">
-      {/* Drink Images */}
-      {[coldcock, bluecock, applecock, comfortcock, sirenacock].map((image, index) => (
-        <img
-          key={index}
-          src={image}
-          alt={`Drink ${index + 1}`}
-          className="w-20 h-20 rounded-md object-cover shadow-md transition-transform duration-300 hover:scale-110"
-        />
-      ))}
+    <footer className="relative overflow-hidden bg-blue-900 py-6">
+      <div className="w-full flex justify-center">
+        <motion.div
+          className="flex gap-24" // Increased spacing between images
+          animate={{ x: ["0%", "-100%"] }} // Moves infinitely from right to left
+          transition={{
+            repeat: Infinity, // Continuous loop
+            repeatType: "loop", // Ensures no sudden glitch
+            duration: 25, // Slower speed
+            ease: "linear", // Smooth movement
+          }}
+        >
+          {/* Duplicate images to make sure it feels like an infinite loop */}
+          {[...images, ...images, ...images].map((image, index) => (
+            <img
+              key={index}
+              src={image}
+              alt={`Drink ${index + 1}`}
+              className="w-24 h-24 rounded-lg object-cover shadow-md"
+            />
+          ))}
+        </motion.div>
+      </div>
     </footer>
   );
 };

@@ -53,7 +53,7 @@ const LandingPage = () => {
 
       {/* Centered Content Area (Ensures Proper Spacing) */}
       <main className="flex flex-col items-center justify-center flex-grow py-16">
-      <h2 className="text-4xl font-semibold text-gray-800 font-serif">
+      <h2 className="text-5xl font-semibold text-gray-800 font-serif mb-8">
 
           Book Us for Your Event!
         </h2>
