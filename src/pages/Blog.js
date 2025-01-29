@@ -19,12 +19,12 @@ const Blog = () => {
     <div className="flex flex-col min-h-screen bg-[#FAF1E6] text-black"> {/* Cream Background */}
       <Navbar />
 
-      <h1 className="text-4xl font-bold text-center mt-6 font-serif">
+      <h1 className="text-4xl font-bold text-center mt-40 font-serif">
         Featured Instagram Posts
       </h1>
 
       {/* Instagram Video Section */}
-      <div className="flex flex-wrap justify-center gap-8 py-8">
+      <div className="flex flex-wrap justify-center gap-8 py-8 pt-12">
         {instagramVideos.map((video, index) => (
           <div key={index} className="w-80 md:w-96 shadow-lg rounded-lg overflow-hidden">
             <iframe

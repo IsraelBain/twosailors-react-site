@@ -52,7 +52,7 @@ const LandingPage = () => {
     {/* Background Box Around Text */}
     <div className="bg-black bg-opacity-50 p-8 rounded-lg text-center w-[90%] max-w-3xl">
       <motion.h1
-        className="text-6xl font-bold text-white font-serif leading-tight tracking-wide"
+        className="text-4xl sm:text-5xl md:text-6xl font-bold text-white font-serif leading-tight tracking-wide"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
@@ -61,7 +61,7 @@ const LandingPage = () => {
       </motion.h1>
 
       <motion.h2
-        className="text-4xl font-semibold text-gray-300 font-serif mt-4"
+        className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-300 font-serif mt-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
