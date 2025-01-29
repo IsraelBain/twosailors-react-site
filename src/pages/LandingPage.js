@@ -30,7 +30,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100 text-gray-900 font-sans">
+    <div className="flex flex-col min-h-screen bg-[#FAF1E6] text-gray-900 font-sans">
       {/* Navbar */}
       <Navbar />
 
