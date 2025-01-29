@@ -1,74 +1,65 @@
-# Getting Started with Create React App
+Two Sailors Bartending - Website 🍸
+Welcome to the official website for Two Sailors Bartending!
+This project was built to showcase bartending services, provide event booking options, and feature the latest cocktail creations & event highlights.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+👨‍💻 About the Developer
+Hi, I’m Israel Bain, a Computer Science student at Dalhousie University with a passion for web development.
+I designed and built this website to create a seamless and modern user experience for Two Sailors Bartending, a business I co-founded with Drew Sailor.
 
-## Available Scripts
+We met while working together and quickly realized bartending is not just a job—it’s an art.
+With a passion for crafting cocktails, entertaining guests, and bringing events to life, we started this business to serve Halifax & Eastern Canada.
 
-In the project directory, you can run:
+💻 How to Run This Project in Codespaces or Locally
 
-### `npm start`
+1️⃣ Open in GitHub Codespaces
+Navigate to the GitHub repository. (Add the repo link here when available)
+Click "Code" → "Open in Codespaces"
+Codespaces will install dependencies automatically, and you can start the project with:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+npm start
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+2️⃣ Clone the Repository Locally
 
-### `npm test`
+git clone https://github.com/yourusername/two-sailors-bartending.git
+cd two-sailors-bartending
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3️⃣ Install Dependencies
 
-### `npm run build`
+npm install
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4️⃣ Start the Development Server
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This will start the project on http://localhost:3000/.
 
-### `npm run eject`
+🛠 Tech Stack
+This project is built using:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+React.js (Frontend framework)
+Tailwind CSS (Styling)
+Framer Motion (Animations)
+React Router (Navigation)
+EmailJS (Contact form handling)
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+📦 Dependencies
+Make sure you have these installed before running the project:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+"dependencies": {
+  "react": "^18.2.0",
+  "react-dom": "^18.2.0",
+  "react-router-dom": "^6.14.1",
+  "framer-motion": "^10.12.4",
+  "tailwindcss": "^3.4.1",
+  "emailjs-com": "^3.2.0"
+}
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+If any dependency is missing, install it manually:
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-## Newest Dependency added for video scrolling effect on Blog
-
-npm install react-intersection-observer
+npm install framer-motion tailwindcss react-router-dom emailjs-com
+👥 Contact & Follow
+Portfolio: (Coming Soon)
+Instagram: @twosailorsbartending
+Email: twosailorsbartending@gmail.com
+Cheers! 🥂
+— Izzy Bain, Developer & Co-Founder of Two Sailors Bartending
