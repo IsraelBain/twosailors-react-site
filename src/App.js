@@ -4,12 +4,11 @@ import LandingPage from "./pages/LandingPage";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
 import ThankYou from "./pages/ThankYou";
-import Navbar from "./components/Navbar"; // Import your Navbar component
+import Navbar from "./components/Navbar"; 
 
 function App(){
   return(
     <Router>
-      {/* Use Navbar component */}
       <Navbar />
 
       {/* Routes */}
