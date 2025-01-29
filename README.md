@@ -1,8 +1,10 @@
-Two Sailors Bartending - Website 🍸
+Two Sailors Bartending Website 🍸
+
 Welcome to the official website for Two Sailors Bartending!
 This project was built to showcase bartending services, provide event booking options, and feature the latest cocktail creations & event highlights.
 
 👨‍💻 About the Developer
+
 Hi, I’m Israel Bain, a Computer Science student at Dalhousie University with a passion for web development.
 I designed and built this website to create a seamless and modern user experience for Two Sailors Bartending, a business I co-founded with Drew Sailor.
 
@@ -18,16 +20,16 @@ Codespaces will install dependencies automatically, and you can start the projec
 
 npm start
 
-2️⃣ Clone the Repository Locally
+2️⃣ Clone the Repository Locally:
 
 git clone https://github.com/yourusername/two-sailors-bartending.git
 cd two-sailors-bartending
 
-3️⃣ Install Dependencies
+3️⃣ Install Dependencies:
 
 npm install
 
-4️⃣ Start the Development Server
+4️⃣ Start the Development Server:
 
 npm start
 
@@ -57,9 +59,11 @@ Make sure you have these installed before running the project:
 If any dependency is missing, install it manually:
 
 npm install framer-motion tailwindcss react-router-dom emailjs-com
+
 👥 Contact & Follow
 Portfolio: (Coming Soon)
 Instagram: @twosailorsbartending
 Email: twosailorsbartending@gmail.com
 Cheers! 🥂
-— Izzy Bain, Developer & Co-Founder of Two Sailors Bartending
+
+— Israel Bain, Developer & Co-Founder of Two Sailors Bartending
