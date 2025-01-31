@@ -8,7 +8,7 @@ const Navbar = () => {
 
       {/* Clickable Logo */}
       <Link to="/" className="flex items-center">
-        <img src={logo} alt="Two Sailors Bartending Logo" className="h-24 w-36 cursor-pointer" />
+        <img src={logo} alt="Two Sailors Bartending Logo" className="h-24 w-36 rounded-lg cursor-pointer" />
       </Link>
 
       {/* Navigation Links */}
