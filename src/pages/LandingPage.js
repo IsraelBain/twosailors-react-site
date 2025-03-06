@@ -37,40 +37,40 @@ const LandingPage = () => {
 
       {/* Hero Section with Corrected Centering */}
       <motion.header
-  className="relative flex items-center justify-center h-screen w-full bg-cover bg-center"
-  style={{ backgroundImage: `url(${backgroundImage})` }}
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 1 }}
->
-  <motion.div
-    className="absolute inset-0 flex justify-center items-center top-[45%]"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1.2, ease: "easeOut" }}
-  >
-    {/* Background Box Around Text */}
-    <div className="bg-black bg-opacity-50 p-8 rounded-lg text-center w-[90%] max-w-3xl">
-      <motion.h1
-        className="text-4xl sm:text-5xl md:text-6xl font-bold text-white font-serif leading-tight tracking-wide"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+        className="relative flex items-center justify-center h-screen w-full bg-cover bg-center"
+        style={{ backgroundImage: `url(${backgroundImage})` }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
       >
-        Bartending Services in Halifax <br /> & Eastern Canada
-      </motion.h1>
+        <motion.div
+          className="absolute inset-0 flex justify-center items-center top-[45%]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+        >
+          {/* Background Box Around Text */}
+          <div className="bg-black bg-opacity-50 p-8 rounded-lg text-center w-[90%] max-w-3xl">
+            <motion.h1
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white font-serif leading-tight tracking-wide"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
+            >
+              Bartending Services in Halifax <br /> & Eastern Canada
+            </motion.h1>
 
-      <motion.h2
-        className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-300 font-serif mt-4"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
-      >
-        Crafting unforgettable cocktails for weddings, parties, and private events.
-      </motion.h2>
-    </div>
-  </motion.div>
-</motion.header>
+            <motion.h2
+              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-300 font-serif mt-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
+            >
+              Crafting unforgettable cocktails for weddings, parties, and private events.
+            </motion.h2>
+          </div>
+        </motion.div>
+      </motion.header>
 
       {/* Centered Content Area (Ensures Proper Spacing) */}
       <motion.main
@@ -159,7 +159,10 @@ const LandingPage = () => {
 
           <label className="block text-gray-700 text-lg">
             Bar Type:
-            <div className="flex gap-4 mt-2">
+            <div className="text-sm text-gray-500">
+              Open means you pay, Cash means guests pay
+            </div>
+            <div className="flex gap-4 mt-2 items-center">
               <label className="flex items-center">
                 <input type="radio" name="barType" value="Open Bar" required className="mr-2" /> Open Bar
               </label>
@@ -174,6 +177,24 @@ const LandingPage = () => {
             <textarea
               name="spirits"
               placeholder="Let us know your preferences!"
+              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </label>
+
+          <label className="block text-gray-700 text-lg">
+            Beer/Wine Offerings:
+            <textarea
+              name="beerWine"
+              placeholder="Table Wines and Bar Wines needed?"
+              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </label>
+
+          <label className="block text-gray-700 text-lg">
+            Hours of Bar Service:
+            <textarea
+              name="barServiceHours"
+              placeholder="Specify the hours of bar service"
               className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
             />
           </label>

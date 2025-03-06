@@ -7,8 +7,10 @@ import bluecock from "../assets/bluecock.jpg";
 import applecock from "../assets/applecock.jpg";
 import comfortcock from "../assets/comfortcock.jpg";
 import sirenacock from "../assets/sirenacock.jpeg";
+import bananaRama from "../assets/BananaRama.jpg"; // New image
+import strawMoj from "../assets/StrawMoj.JPG"; // New image
 
-const images = [coldcock, bluecock, applecock, comfortcock, sirenacock];
+const images = [coldcock, bluecock, applecock, comfortcock, sirenacock, bananaRama, strawMoj];
 
 const Footer = () => {
   return (
