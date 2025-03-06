@@ -5,10 +5,9 @@ import logo from "../assets/logo.jpg"; // Ensure the path is correct
 const Navbar = () => {
   return (
     <nav className="bg-blue-900 text-white fixed top-0 w-full z-50 flex justify-between items-center px-10 py-4 font-sans">
-
       {/* Clickable Logo */}
       <Link to="/" className="flex items-center">
-        <img src={logo} alt="Two Sailors Bartending Logo" className="h-24 w-36 rounded-lg cursor-pointer" />
+        <img src={logo} alt="Two Sailors Bartending Logo" className="h-24 w-36 rounded-lg cursor-pointer mr-4 md:mr-0" />
       </Link>
 
       {/* Navigation Links */}
