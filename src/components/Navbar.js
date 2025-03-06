@@ -7,7 +7,11 @@ const Navbar = () => {
     <nav className="bg-blue-900 text-white fixed top-0 w-full z-50 flex justify-between items-center px-4 md:px-10 py-4 font-sans">
       {/* Clickable Logo */}
       <Link to="/" className="flex items-center">
-        <img src={logo} alt="Two Sailors Bartending Logo" className="h-24 w-36 rounded-lg cursor-pointer mr-4 md:mr-0" />
+        <img
+          src={logo}
+          alt="Two Sailors Bartending Logo"
+          className="h-24 w-36 rounded-lg cursor-pointer mr-4 md:mr-0 -ml-4 md:ml-0"
+        />
       </Link>
 
       {/* Navigation Links */}
