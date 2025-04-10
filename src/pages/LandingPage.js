@@ -216,6 +216,22 @@ const LandingPage = () => {
           </button>
         </motion.form>
       </motion.main>
+            {/* Contact Us Section */}
+            <motion.section
+        className="bg-white py-12 px-6 text-center shadow-inner"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <h2 className="text-4xl font-serif font-semibold text-gray-800 mb-4">Contact Us</h2>
+        <p className="text-lg text-gray-600 mb-2">Phone: (902) 449-0722</p>
+        <p className="text-lg text-gray-600">Email: <a href="mailto:twosailorsco@gmail.com" className="text-blue-600 underline">twosailorsco@gmail.com</a></p>
+      </motion.section>
+
+      {/* Footer Section */}
+
+
 
       {/* Footer Section */}
       <Footer />
