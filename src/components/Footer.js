@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 // Import wave and drink images
-import waater from "../assets/wateer.png";
+import wateer from "../assets/longestwave.png";
 import coldcock from "../assets/coldcock.jpg";
 import bluecock from "../assets/bluecock.jpg";
 import applecock from "../assets/applecock.jpg";
@@ -15,12 +15,13 @@ const images = [coldcock, bluecock, applecock, comfortcock, sirenacock, bananaRa
 
 const Footer = () => {
   return (
-    <footer className="relative overflow-hidden bg-blue-900 pt-0 pb-6">
+    <footer className="relative overflow-hidden pt-0 pb-6" style={{ backgroundColor: "#0C2E58" }}>
+
       {/* Wave PNG Divider */}
       <img
-        src={waater}
+        src={wateer}
         alt="Wave Divider"
-        className="w-full h-auto"
+        className="w-full h-auto -mt-1"
         style={{ marginBottom: "-1px" }} // optional for seamless visual edge
       />
 
