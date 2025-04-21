@@ -71,11 +71,11 @@ const AboutUs = () => {
             {/* Profile 2 */}
             <div className="max-w-md text-center bg-white p-6 rounded-lg shadow-md">
               <img src={drewpfp} alt="Drew" className="w-40 h-40 rounded-full shadow-md object-cover mb-4" />
-              <h2 className="text-4xl font-bold text-gray text-center font-serif leading-tight tracking-wide">Drew Francis Walsh</h2>
+              <h2 className="text-4xl font-bold text-gray text-center font-serif leading-tight tracking-wide">Drew Walsh</h2>
               <p className="text-2xl font-semibold text-gray-800 font-serif">
                 Drew brings creativity and precision to every drink he makes.
               </p>
-              <p className="mt-2 text-red-500 font-bold">Favorite Drink: Old Fashioned</p>
+              <p className="mt-2 text-red-500 font-bold">Favorite Drink: Caipirinha</p>
             </div>
           </div>
         </div>

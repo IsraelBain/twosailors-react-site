@@ -57,7 +57,7 @@ const LandingPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
             >
-              Bartending Services in Halifax <br /> & Eastern Canada
+              Bartending Services in Halifax <br /> & Atlantic Canada
             </motion.h1>
 
             <motion.h2
@@ -81,7 +81,7 @@ const LandingPage = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <h2 className="text-5xl font-semibold text-gray-800 font-serif mb-12">
-          Book Us for Your Event!
+        Send Us an Inquiry!
         </h2>
 
         {/* Form Section with Smooth Fade-in & Scale Effect */}
@@ -121,6 +121,14 @@ const LandingPage = () => {
               type="date"
               name="date"
               required
+              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </label>
+          <label className="block text-gray-700 text-lg">
+            Hours of Bar Service:
+            <textarea
+              name="barServiceHours"
+              placeholder="Specify the hours of bar service"
               className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
             />
           </label>
@@ -191,15 +199,6 @@ const LandingPage = () => {
           </label>
 
           <label className="block text-gray-700 text-lg">
-            Hours of Bar Service:
-            <textarea
-              name="barServiceHours"
-              placeholder="Specify the hours of bar service"
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
-          </label>
-
-          <label className="block text-gray-700 text-lg">
             Allergies or Special Requests:
             <textarea
               name="specialRequests"
@@ -225,7 +224,6 @@ const LandingPage = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <h2 className="text-4xl font-serif font-semibold text-gray-800 mb-4">Contact Us</h2>
-        <p className="text-lg text-gray-600 mb-2">Phone: (902) 449-0722</p>
         <p className="text-lg text-gray-600">Email: <a href="mailto:twosailorsco@gmail.com" className="text-blue-600 underline">twosailorsco@gmail.com</a></p>
       </motion.section>
 
