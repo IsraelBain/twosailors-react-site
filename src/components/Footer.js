@@ -1,32 +1,41 @@
 import React from "react";
-import { motion } from "framer-motion"; // Import Framer Motion
+import { motion } from "framer-motion";
 
-// Import drink images
+// Import wave and drink images
+import waater from "../assets/wateer.png";
 import coldcock from "../assets/coldcock.jpg";
 import bluecock from "../assets/bluecock.jpg";
 import applecock from "../assets/applecock.jpg";
 import comfortcock from "../assets/comfortcock.jpg";
 import sirenacock from "../assets/sirenacock.jpeg";
-import bananaRama from "../assets/BananaRama.jpg"; // New image
-import strawMoj from "../assets/StrawMoj.JPG"; // New image
+import bananaRama from "../assets/BananaRama.jpg";
+import strawMoj from "../assets/StrawMoj.JPG";
 
 const images = [coldcock, bluecock, applecock, comfortcock, sirenacock, bananaRama, strawMoj];
 
 const Footer = () => {
   return (
-    <footer className="relative overflow-hidden bg-blue-900 py-6">
+    <footer className="relative overflow-hidden bg-blue-900 pt-0 pb-6">
+      {/* Wave PNG Divider */}
+      <img
+        src={waater}
+        alt="Wave Divider"
+        className="w-full h-auto"
+        style={{ marginBottom: "-1px" }} // optional for seamless visual edge
+      />
+
+      {/* Animated Drink Loop */}
       <div className="w-full flex justify-center">
         <motion.div
-          className="flex gap-24" // Increased spacing between images
-          animate={{ x: ["0%", "-100%"] }} // Moves infinitely from right to left
+          className="flex gap-24"
+          animate={{ x: ["0%", "-100%"] }}
           transition={{
-            repeat: Infinity, // Continuous loop
-            repeatType: "loop", // Ensures no sudden glitch
-            duration: 25, // Slower speed
-            ease: "linear", // Smooth movement
+            repeat: Infinity,
+            repeatType: "loop",
+            duration: 25,
+            ease: "linear",
           }}
         >
-          {/* Duplicate images to make sure it feels like an infinite loop */}
           {[...images, ...images, ...images].map((image, index) => (
             <img
               key={index}

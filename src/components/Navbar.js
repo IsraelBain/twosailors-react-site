@@ -7,18 +7,19 @@ import tiktokIcon from "../assets/tiktok.png";
 
 const Navbar = () => {
   return (
-    <nav className="bg-blue-900 text-white fixed top-0 w-full z-50 py-4 font-sans">
+    <nav className="bg-blue-900 text-white fixed top-0 w-full z-50 py-6 md:py-8 font-sans">
+
       <div className="flex items-center justify-between px-4 md:px-10 relative">
         {/* Left: Social Icons */}
         <div className="flex items-center gap-4">
           <a href="https://www.tiktok.com/@twosailorsbartending" target="_blank" rel="noopener noreferrer">
-            <img src={tiktokIcon} alt="TikTok" className="h-8 w-8" />
+            <img src={tiktokIcon} alt="TikTok" className="h-12 w-12" />
           </a>
           <a href="https://www.instagram.com/twosailorsbartending/" target="_blank" rel="noopener noreferrer">
-            <img src={instagramIcon} alt="Instagram" className="h-8 w-8" />
+            <img src={instagramIcon} alt="Instagram" className="h-12 w-12" />
           </a>
           <a href="https://www.facebook.com/profile.php?id=61554763772561" target="_blank" rel="noopener noreferrer">
-            <img src={facebookIcon} alt="Facebook" className="h-8 w-8" />
+            <img src={facebookIcon} alt="Facebook" className="h-12 w-12" />
           </a>
         </div>
 
