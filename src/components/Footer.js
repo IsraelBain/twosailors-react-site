@@ -16,19 +16,19 @@ const images = [coldcock, bluecock, applecock, comfortcock, sirenacock, bananaRa
 const Footer = () => {
   return (
     <footer className="relative overflow-hidden pt-0 pb-6" style={{ backgroundColor: "#0C2E58" }}>
-
+      
       {/* Wave PNG Divider */}
       <img
         src={wateer}
         alt="Wave Divider"
         className="w-full h-auto -mt-1"
-        style={{ marginBottom: "-1px" }} // optional for seamless visual edge
+        style={{ marginBottom: "-1px" }}
       />
 
       {/* Animated Drink Loop */}
       <div className="w-full flex justify-center">
         <motion.div
-          className="flex gap-24"
+          className="flex gap-16 sm:gap-24"
           animate={{ x: ["0%", "-100%"] }}
           transition={{
             repeat: Infinity,
@@ -42,7 +42,7 @@ const Footer = () => {
               key={index}
               src={image}
               alt={`Drink ${index + 1}`}
-              className="w-24 h-24 rounded-lg object-cover shadow-md"
+              className="w-20 h-20 sm:w-24 sm:h-24 rounded-lg object-cover shadow-md"
             />
           ))}
         </motion.div>
