@@ -1,10 +1,11 @@
 import React from "react";
-import { motion } from "framer-motion"; // Import Framer Motion for animations
-import Navbar from "../components/Navbar"; // Import Navbar
-import Footer from "../components/Footer"; // Import Footer
+import { motion } from "framer-motion";
+import { Helmet } from "react-helmet";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
-import backgroundImage from "../assets/back2back.jpg"; // Import background image
+import backgroundImage from "../assets/back2back.jpg";
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -13,15 +14,15 @@ const LandingPage = () => {
     e.preventDefault();
     emailjs
       .sendForm(
-        "service_ds9yha8", // Your Service ID
-        "template_7rzxizn", // Your Template ID
-        e.target, // The form element
-        "8rp67ph2Lbxxkvc5a" // Your Public Key
+        "service_ds9yha8",
+        "template_7rzxizn",
+        e.target,
+        "8rp67ph2Lbxxkvc5a"
       )
       .then(
         (result) => {
           console.log("Email sent successfully:", result.text);
-          navigate("/thank-you"); // Redirect to Thank You page
+          navigate("/thank-you");
         },
         (error) => {
           console.error("Error sending email:", error.text);
@@ -32,10 +33,29 @@ const LandingPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FAF1E6] text-gray-900 font-sans">
-      {/* Navbar */}
+      <Helmet>
+        <title>Two Sailors Bartending | Halifax & Atlantic Canada Bartenders</title>
+        <meta
+          name="description"
+          content="Two Sailors Bartending offers professional bartending services for weddings, parties, and private events across Halifax and Atlantic Canada. Custom cocktails, quality service, unforgettable experiences."
+        />
+        <meta property="og:title" content="Two Sailors Bartending" />
+        <meta
+          property="og:description"
+          content="Professional event bartending in Halifax and Atlantic Canada. Book expert bartenders for weddings, parties, and private events."
+        />
+        <meta
+          property="og:image"
+          content="https://www.twosailorsbartending.ca/social-preview.jpg"
+        />
+        <meta property="og:url" content="https://www.twosailorsbartending.ca/" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://www.twosailorsbartending.ca/" />
+      </Helmet>
+
       <Navbar />
 
-      {/* Hero Section with Corrected Centering */}
       <motion.header
         className="relative flex items-center justify-center h-screen w-full bg-cover bg-center"
         style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -49,7 +69,6 @@ const LandingPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
-          {/* Background Box Around Text */}
           <div className="bg-black bg-opacity-50 p-8 rounded-lg text-center w-[90%] max-w-3xl">
             <motion.h1
               className="text-4xl sm:text-5xl md:text-6xl font-bold text-white font-serif leading-tight tracking-wide"
@@ -72,7 +91,6 @@ const LandingPage = () => {
         </motion.div>
       </motion.header>
 
-      {/* Centered Content Area (Ensures Proper Spacing) */}
       <motion.main
         className="flex flex-col items-center justify-center flex-grow py-16 px-6"
         initial={{ opacity: 0, y: 30 }}
@@ -81,7 +99,7 @@ const LandingPage = () => {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <h2 className="text-5xl font-semibold text-gray-800 font-serif mb-12">
-        Send Us an Inquiry!
+          Send Us an Inquiry!
         </h2>
 
         {/* Form Section with Smooth Fade-in & Scale Effect */}
