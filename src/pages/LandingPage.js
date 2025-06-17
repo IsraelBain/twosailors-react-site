@@ -143,12 +143,34 @@ const LandingPage = () => {
             />
           </label>
           <label className="block text-gray-700 text-lg">
+            Occasion:
+            <input
+              type="text"
+              name="occasion"
+              placeholder="e.g. Wedding, Corporate Party, etc."
+              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </label>
+          <label className="block text-gray-700 text-lg">
             Hours of Bar Service:
             <textarea
               name="barServiceHours"
               placeholder="Specify the hours of bar service"
               className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
             />
+          </label>
+          <label className="block text-gray-700 text-lg">
+            Who is providing the liquor?
+            <select
+              name="liquorProvider"
+              required
+              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
+            >
+              <option value="">Select an option</option>
+              <option value="Two Sailors">Two Sailors</option>
+              <option value="Client Will">Client Will</option>
+              <option value="Undecided">Undecided</option>
+            </select>
           </label>
 
           <label className="block text-gray-700 text-lg">
@@ -221,6 +243,15 @@ const LandingPage = () => {
             <textarea
               name="specialRequests"
               placeholder="Tell us about any special requests or allergies"
+              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </label>
+          <label className="block text-gray-700 text-lg">
+            How did you hear about us?
+            <input
+              type="text"
+              name="referralSource"
+              placeholder="Instagram, Google, Friend, etc."
               className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
             />
           </label>
