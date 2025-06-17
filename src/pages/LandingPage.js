@@ -249,7 +249,7 @@ const LandingPage = () => {
           <label className="block text-gray-700 text-lg">
             Allergies or Special Requests:
             <textarea
-              name="specialRequests"
+              name="cupPreference"
               placeholder="Tell us about any special requests or allergies"
               className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
             />
