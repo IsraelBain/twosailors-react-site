@@ -237,6 +237,14 @@ const LandingPage = () => {
               className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
             />
           </label>
+          <label className="block text-gray-700 text-lg">
+            Do you need Cups:
+            <textarea
+              name="specialRequests"
+              placeholder="Glass or Plastic?"
+              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
+            />
+          </label>
 
           <label className="block text-gray-700 text-lg">
             Allergies or Special Requests:
