@@ -6,6 +6,8 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import backgroundImage from "../assets/back2back.jpg";
+import CoffeeLiqueurPopup from "../components/CoffeeLiqueurPopup";
+
 
 const LandingPage = () => {
   const navigate = useNavigate();
@@ -33,6 +35,7 @@ const LandingPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FAF1E6] text-gray-900 font-sans">
+      <CoffeeLiqueurPopup />
       <Helmet>
         <title>Two Sailors Bartending | Halifax & Atlantic Canada Bartenders</title>
         <meta
