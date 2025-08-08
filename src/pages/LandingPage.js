@@ -177,7 +177,15 @@ const LandingPage = () => {
           </label>
 
           <label>Hours of Bar Service:
-            <input type="text" name="barServiceHours" placeholder="e.g. 4PM-12AM" className="w-full p-3 border mt-2 rounded-md" />
+           <input
+             type="number"
+             name="barServiceHours"
+             placeholder="e.g. 6"
+             min="1"
+             step="0.5"
+             className="w-full p-3 border mt-2 rounded-md"
+             required
+           />
           </label>
 
           {/* Liquor Provider (dropdown) */}
