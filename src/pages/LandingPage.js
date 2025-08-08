@@ -12,8 +12,10 @@ import quoteEngine from "../utils/quoteEngine";
 const LandingPage = () => {
   const navigate = useNavigate();
   const [barType, setBarType] = useState("");
+  const [wantsCocktails, setWantsCocktails] = useState(false);
   const [selectedCocktails, setSelectedCocktails] = useState([]);
 
+  // Your cocktail list
   const cocktailOptions = [
     "Margarita",
     "Aperol Spritz",
@@ -34,6 +36,7 @@ const LandingPage = () => {
     );
   };
 
+  // Helper to pass values to EmailJS when using sendForm
   const appendHidden = (form, name, value) => {
     const input = document.createElement("input");
     input.type = "hidden";
@@ -42,17 +45,25 @@ const LandingPage = () => {
     form.appendChild(input);
   };
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
-
     const form = e.target;
+
+    // Single numeric hours only; engine adds +2 (setup/teardown)
+    const barServiceHoursNum = Number(form.barServiceHours.value || 0);
+
+    // Auto-derive crowd type (no selector on UI)
+    const derivedCrowdType =
+      form.barType.value === "Open Bar"
+        ? (wantsCocktails ? "heavy_cocktail" : "wedding_40_35_25")
+        : "cash_bar";
 
     const formDataObj = {
       name: form.name.value,
       email: form.email.value,
       date: form.date.value,
       occasion: form.occasion.value,
-      barServiceHours: Number(form.barServiceHours.value || 0),
+      barServiceHours: barServiceHoursNum, // number only
       liquorProvider: form.liquorProvider.value,
       guests: Number(form.guests.value || 0),
       location: form.location.value,
@@ -63,54 +74,73 @@ const LandingPage = () => {
       cupPreference: form.cupPreference.value,
       specialRequests: form.specialRequests.value,
       referralSource: form.referralSource.value,
+      wantsCocktails,
       cocktails: selectedCocktails,
-      // calculator assumptions
-      drinksPerGuest: 3,
-      crowdType: "standard_lean_beer",
-      km: 0
+      drinksPerGuest: 6,              // your default
+      crowdType: derivedCrowdType,    // used by engine
+      km: Number(form.km?.value || 0) // optional for travel fee
     };
 
+    // Run the calculator
     const quote = quoteEngine(formDataObj);
 
-    // Make template variables available to EmailJS
+    // Map EXACT variable names to your current EmailJS template
+    appendHidden(form, "name", formDataObj.name);
+    appendHidden(form, "email", formDataObj.email);
+    appendHidden(form, "date", formDataObj.date);
+    appendHidden(form, "occasion", formDataObj.occasion);
+    appendHidden(form, "barServiceHours", String(formDataObj.barServiceHours));
+    appendHidden(form, "liquorProvider", formDataObj.liquorProvider);
+    appendHidden(form, "guests", String(formDataObj.guests));
+    appendHidden(form, "location", formDataObj.location);
+    appendHidden(form, "budget", formDataObj.budget);
+    appendHidden(form, "barType", formDataObj.barType);
+    appendHidden(form, "cocktails", (formDataObj.cocktails || []).join(", "));
+    appendHidden(form, "spirits", formDataObj.spirits);
+    appendHidden(form, "beerWine", formDataObj.beerWine);
+    appendHidden(form, "cupPreference", formDataObj.cupPreference);
+    appendHidden(form, "specialRequests", formDataObj.specialRequests);
+    appendHidden(form, "referralSource", formDataObj.referralSource);
+
+    // Costs (labor/prep/fees only; product costing is handled by the engine if sku_prices.json present)
     appendHidden(form, "laborCost", quote.laborCost);
     appendHidden(form, "prepCost", quote.prepCost);
     appendHidden(form, "fees", quote.fees);
     appendHidden(form, "totalCost", quote.totalCost);
 
-    appendHidden(form, "cocktails", quote.cocktails);
-
-    // If you keep your {{#each}} loops:
-    appendHidden(form, "shoppingList", quote.shoppingList);
-    appendHidden(form, "ordersBySupplier", quote.ordersBySupplier);
-
-    // Also include HTML tables (in case you want to render them directly)
+    // Internal tables & JSON (your template renders these with triple curlies)
     appendHidden(form, "costTableHTML", quote.costTableHTML);
     appendHidden(form, "shoppingListHTML", quote.shoppingListHTML);
     appendHidden(form, "ordersBySupplierHTML", quote.ordersBySupplierHTML);
-
-    // Full JSON for debugging
     appendHidden(form, "quoteDetails", quote.quoteDetails);
 
-    emailjs
-      .sendForm(
+    // OPTIONAL product costing (only used if you add these vars to the EmailJS template)
+    appendHidden(form, "productCostPreTax", quote.productCostPreTax);
+    appendHidden(form, "productTax", quote.productTax);
+    appendHidden(form, "productTotal", quote.productTotal);
+    appendHidden(form, "productCostHTML", quote.productCostHTML);
+
+    try {
+      // INTERNAL-ONLY email to your template (same id you used before)
+      await emailjs.sendForm(
         "service_ds9yha8",
-        "template_7rzxizn",
+        "template_7rzxizn", // your current template id
         form,
         "8rp67ph2Lbxxkvc5a"
-      )
-      .then(
-        () => navigate("/thank-you"),
-        (error) => {
-          console.error("Error sending email:", error.text);
-          alert("An error occurred. Please try again later.");
-        }
       );
+
+      navigate("/thank-you");
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert("An error occurred. Please try again later.");
+    }
   };
 
   return (
     <div className="flex flex-col min-h-screen bg-[#FAF1E6] text-gray-900 font-sans">
+      {/* Keep your popup */}
       <CoffeeLiqueurPopup />
+
       <Helmet>
         <title>Two Sailors Bartending | Halifax & Atlantic Canada Bartenders</title>
         <meta
@@ -121,6 +151,7 @@ const LandingPage = () => {
 
       <Navbar />
 
+      {/* Hero w/ animations preserved */}
       <motion.header
         className="relative flex items-center justify-center h-screen w-full bg-cover bg-center"
         style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -145,6 +176,7 @@ const LandingPage = () => {
         </motion.div>
       </motion.header>
 
+      {/* Form section w/ animations preserved */}
       <motion.main
         className="flex flex-col items-center justify-center flex-grow py-16 px-6"
         initial={{ opacity: 0, y: 30 }}
@@ -176,19 +208,23 @@ const LandingPage = () => {
             <input type="text" name="occasion" className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
+          {/* HOURS = NUMBER ONLY (engine adds +2 hrs) */}
           <label>Hours of Bar Service:
-           <input
-             type="number"
-             name="barServiceHours"
-             placeholder="e.g. 6"
-             min="1"
-             step="0.5"
-             className="w-full p-3 border mt-2 rounded-md"
-             required
-           />
+            <input
+              type="number"
+              name="barServiceHours"
+              placeholder="e.g. 8"
+              min="1"
+              step="0.5"
+              className="w-full p-3 border mt-2 rounded-md"
+              required
+            />
+            <div className="text-xs text-gray-500 mt-1">
+              We add 1 hour setup + 1 hour teardown automatically.
+            </div>
           </label>
 
-          {/* Liquor Provider (dropdown) */}
+          {/* Liquor Provider */}
           <label>Liquor Provider:
             <select
               name="liquorProvider"
@@ -219,22 +255,59 @@ const LandingPage = () => {
             <div className="text-sm text-gray-500">Open means you pay, Cash means guests pay</div>
             <div className="flex gap-4 mt-2">
               <label>
-                <input type="radio" name="barType" value="Open Bar" required onChange={() => setBarType("Open Bar")} /> Open Bar
+                <input
+                  type="radio"
+                  name="barType"
+                  value="Open Bar"
+                  required
+                  onChange={() => setBarType("Open Bar")}
+                /> Open Bar
               </label>
               <label>
-                <input type="radio" name="barType" value="Cash Bar" required onChange={() => setBarType("Cash Bar")} /> Cash Bar
+                <input
+                  type="radio"
+                  name="barType"
+                  value="Cash Bar"
+                  required
+                  onChange={() => setBarType("Cash Bar")}
+                /> Cash Bar
               </label>
             </div>
           </label>
 
-          {barType === "Open Bar" && (
-            <label>Preferred Cocktails:
+          {/* New: ask if they want cocktails (applies to both bar types) */}
+          <label>Would you like cocktails?
+            <div className="flex gap-6 mt-2">
+              <label>
+                <input
+                  type="radio"
+                  name="wantsCocktails"
+                  value="yes"
+                  onChange={() => setWantsCocktails(true)}
+                /> Yes
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="wantsCocktails"
+                  value="no"
+                  defaultChecked
+                  onChange={() => setWantsCocktails(false)}
+                /> No
+              </label>
+            </div>
+          </label>
+
+          {/* Only show cocktail options when they said Yes */}
+          {wantsCocktails && (
+            <label>Choose your cocktails:
               <div className="mt-2 grid grid-cols-1 gap-2">
                 {cocktailOptions.map((cocktail) => (
                   <label key={cocktail} className="flex items-center">
                     <input
                       type="checkbox"
                       value={cocktail}
+                      checked={selectedCocktails.includes(cocktail)}
                       onChange={() => handleCocktailChange(cocktail)}
                       className="mr-2"
                     />
@@ -264,6 +337,9 @@ const LandingPage = () => {
           <label>Heard About Us From:
             <input type="text" name="referralSource" className="w-full p-3 border mt-2 rounded-md" />
           </label>
+
+          {/* Optional distance for travel fee */}
+          <input type="hidden" name="km" value="0" />
 
           <button type="submit" className="bg-blue-900 text-white px-6 py-3 rounded-lg mt-4">
             Submit

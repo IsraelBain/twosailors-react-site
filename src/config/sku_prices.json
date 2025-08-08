@@ -1,0 +1,29 @@
+{
+    "tax_rate": 0.15,
+    "items": {
+      "Vodka": { "unit": "1.14L", "unit_qty_oz": 38, "unit_cost": 39.99 },
+      "White Rum": { "unit": "1.14L", "unit_qty_oz": 38, "unit_cost": 39.99 },
+      "Gin": { "unit": "1.14L", "unit_qty_oz": 38, "unit_cost": 42.99 },
+      "Rye": { "unit": "750ml", "unit_qty_oz": 25, "unit_cost": 29.99 },
+      "Tequila": { "unit": "750ml", "unit_qty_oz": 25, "unit_cost": 43.99 },
+      "Triple Sec": { "unit": "750ml", "unit_qty_oz": 25, "unit_cost": 32.49 },
+      "Aperol": { "unit": "750ml", "unit_qty_oz": 25, "unit_cost": 33.99 },
+      "Prosecco (750ml)": { "unit": "750ml", "unit_qty_oz": 25, "unit_cost": 21.99 },
+      "Wine (750ml)": { "unit": "750ml", "unit_qty_oz": 25, "unit_cost": 21.99 },
+      "Beer (cans)": { "unit": "can", "per_case": 24, "case_cost": 55.00 },
+      "Coke": { "unit": "L", "unit_cost": 1.80 },
+      "Diet Coke": { "unit": "L", "unit_cost": 1.80 },
+      "Ginger Ale": { "unit": "L", "unit_cost": 1.80 },
+      "Sprite": { "unit": "L", "unit_cost": 1.80 },
+      "Soda Water": { "unit": "L", "unit_cost": 1.20 },
+      "Tonic Water": { "unit": "L", "unit_cost": 1.20 },
+      "Ginger Beer": { "unit": "L", "unit_cost": 2.50 },
+      "Raspberries": { "unit": "box", "unit_cost": 4.99 },
+      "Mint (bunches)": { "unit": "bunch", "unit_cost": 3.99 },
+      "Limes": { "unit": "pcs", "unit_cost": 1.0 },
+      "Lemons": { "unit": "pcs", "unit_cost": 1.30 },
+      "Oranges": { "unit": "pcs", "unit_cost": 0.85 },
+      "Rimming Salt": { "unit": "1kg tubs", "unit_cost": 6.99 },
+      "Ice": { "unit": "lbs", "unit_cost": 0.40 }
+    }
+  }

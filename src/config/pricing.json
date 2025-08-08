@@ -1,75 +1,28 @@
 {
-    "Margarita": {
-      "ingredients": {
-        "Tequila": { "unit": "oz", "qty": 1.5 },
-        "Triple Sec": { "unit": "oz", "qty": 0.5 },
-        "Lime Juice": { "unit": "oz", "qty": 1 },
-        "Salt Rim": { "unit": "each", "qty": 1 }
-      }
+    "open_bar_rate": 60,
+    "cash_bar_rate": 75,
+    "minimum_hours": 3,
+  
+    "booking_fee": 200,
+    "insurance_fee": 200,
+    "travel_rate_per_km": 0.0,
+  
+    "prep": {
+      "enabled": true,
+      "rate_per_hour": 30,
+      "default_hours": { "cash_bar": 2, "open_bar": 3 },
+      "max_hours": 3
     },
-    "Aperol Spritz": {
-      "ingredients": {
-        "Aperol": { "unit": "oz", "qty": 2 },
-        "Prosecco": { "unit": "oz", "qty": 3 },
-        "Soda Water": { "unit": "oz", "qty": 1 },
-        "Orange Slice": { "unit": "each", "qty": 1 }
-      }
+  
+    "rail_split": { "Vodka": 0.4, "White Rum": 0.3, "Gin": 0.2, "Rye": 0.1 },
+    "mixer_split": {
+      "Coke": 0.30, "Diet Coke": 0.10, "Ginger Ale": 0.20,
+      "Sprite": 0.15, "Soda Water": 0.15, "Tonic Water": 0.10
     },
-    "Mojito": {
-      "ingredients": {
-        "White Rum": { "unit": "oz", "qty": 2 },
-        "Lime Juice": { "unit": "oz", "qty": 1 },
-        "Simple Syrup": { "unit": "oz", "qty": 1 },
-        "Mint Leaves": { "unit": "each", "qty": 6 },
-        "Soda Water": { "unit": "oz", "qty": 2 }
-      }
-    },
-    "Tom Collins": {
-      "ingredients": {
-        "Gin": { "unit": "oz", "qty": 2 },
-        "Lemon Juice": { "unit": "oz", "qty": 1 },
-        "Simple Syrup": { "unit": "oz", "qty": 0.5 },
-        "Soda Water": { "unit": "oz", "qty": 2 }
-      }
-    },
-    "Moscow Mule": {
-      "ingredients": {
-        "Vodka": { "unit": "oz", "qty": 2 },
-        "Lime Juice": { "unit": "oz", "qty": 0.5 },
-        "Ginger Beer": { "unit": "oz", "qty": 4 }
-      }
-    },
-    "Raspberry Collins": {
-      "ingredients": {
-        "Vodka": { "unit": "oz", "qty": 2 },
-        "Lime Juice": { "unit": "oz", "qty": 0.75 },
-        "Raspberry Syrup": { "unit": "oz", "qty": 1 },
-        "Soda Water": { "unit": "oz", "qty": 2 },
-        "Raspberry": { "unit": "each", "qty": 3 }
-      }
-    },
-    "Dark and Stormy": {
-      "ingredients": {
-        "Dark Rum": { "unit": "oz", "qty": 2 },
-        "Ginger Beer": { "unit": "oz", "qty": 4 },
-        "Lime Wedge": { "unit": "each", "qty": 1 }
-      }
-    },
-    "Old Fashioned": {
-      "ingredients": {
-        "Bourbon": { "unit": "oz", "qty": 2 },
-        "Simple Syrup": { "unit": "oz", "qty": 0.25 },
-        "Angostura Bitters": { "unit": "dash", "qty": 2 },
-        "Orange Peel": { "unit": "each", "qty": 1 }
-      }
-    },
-    "Espresso Martini": {
-      "ingredients": {
-        "Vodka": { "unit": "oz", "qty": 1.5 },
-        "Coffee Liqueur": { "unit": "oz", "qty": 1 },
-        "Espresso": { "unit": "oz", "qty": 1 },
-        "Simple Syrup": { "unit": "oz", "qty": 0.5 }
-      }
-    }
+    "wine_split": { "white": 0.6, "red": 0.4 },
+  
+    "specialty_cocktail_fraction": 0.4,
+    "oz_per_highball_spirit": 1.5,
+    "oz_per_highball_mixer": 4.0
   }
   
