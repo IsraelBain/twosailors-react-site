@@ -34,41 +34,73 @@ const LandingPage = () => {
     );
   };
 
+  const appendHidden = (form, name, value) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = typeof value === "string" ? value : JSON.stringify(value);
+    form.appendChild(input);
+  };
+
   const sendEmail = (e) => {
     e.preventDefault();
 
+    const form = e.target;
+
     const formDataObj = {
-      name: e.target.name.value,
-      guests: Number(e.target.guests.value),
-      barType: e.target.barType.value,
+      name: form.name.value,
+      email: form.email.value,
+      date: form.date.value,
+      occasion: form.occasion.value,
+      barServiceHours: form.barServiceHours.value,
+      liquorProvider: form.liquorProvider.value,
+      guests: Number(form.guests.value || 0),
+      location: form.location.value,
+      budget: form.budget.value,
+      barType: form.barType.value,
+      spirits: form.spirits.value,
+      beerWine: form.beerWine.value,
+      cupPreference: form.cupPreference.value,
+      specialRequests: form.specialRequests.value,
+      referralSource: form.referralSource.value,
       cocktails: selectedCocktails,
-      serviceHours: parseFloat(e.target.barServiceHours.value) || 6,
+      // calculator assumptions
       drinksPerGuest: 3,
-      km: 0 // optional travel distance if you want to capture later
+      crowdType: "standard_lean_beer",
+      km: 0
     };
 
     const quote = quoteEngine(formDataObj);
-    console.log("Quote Outputs:", quote);
 
-    // Append clientEmail as hidden field
-    const hiddenField = document.createElement("input");
-    hiddenField.type = "hidden";
-    hiddenField.name = "quoteDetails";
-    hiddenField.value = quote.clientEmail;
-    e.target.appendChild(hiddenField);
+    // Make template variables available to EmailJS
+    appendHidden(form, "laborCost", quote.laborCost);
+    appendHidden(form, "prepCost", quote.prepCost);
+    appendHidden(form, "fees", quote.fees);
+    appendHidden(form, "totalCost", quote.totalCost);
+
+    appendHidden(form, "cocktails", quote.cocktails);
+
+    // If you keep your {{#each}} loops:
+    appendHidden(form, "shoppingList", quote.shoppingList);
+    appendHidden(form, "ordersBySupplier", quote.ordersBySupplier);
+
+    // Also include HTML tables (in case you want to render them directly)
+    appendHidden(form, "costTableHTML", quote.costTableHTML);
+    appendHidden(form, "shoppingListHTML", quote.shoppingListHTML);
+    appendHidden(form, "ordersBySupplierHTML", quote.ordersBySupplierHTML);
+
+    // Full JSON for debugging
+    appendHidden(form, "quoteDetails", quote.quoteDetails);
 
     emailjs
       .sendForm(
         "service_ds9yha8",
         "template_7rzxizn",
-        e.target,
+        form,
         "8rp67ph2Lbxxkvc5a"
       )
       .then(
-        (result) => {
-          console.log("Email sent successfully:", result.text);
-          navigate("/thank-you");
-        },
+        () => navigate("/thank-you"),
         (error) => {
           console.error("Error sending email:", error.text);
           alert("An error occurred. Please try again later.");
@@ -83,21 +115,8 @@ const LandingPage = () => {
         <title>Two Sailors Bartending | Halifax & Atlantic Canada Bartenders</title>
         <meta
           name="description"
-          content="Two Sailors Bartending offers professional bartending services for weddings, parties, and private events across Halifax and Atlantic Canada. Custom cocktails, quality service, unforgettable experiences."
+          content="Two Sailors Bartending offers professional bartending services for weddings, parties, and private events across Halifax and Atlantic Canada."
         />
-        <meta property="og:title" content="Two Sailors Bartending" />
-        <meta
-          property="og:description"
-          content="Professional event bartending in Halifax and Atlantic Canada. Book expert bartenders for weddings, parties, and private events."
-        />
-        <meta
-          property="og:image"
-          content="https://www.twosailorsbartending.ca/social-preview.jpg"
-        />
-        <meta property="og:url" content="https://www.twosailorsbartending.ca/" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://www.twosailorsbartending.ca/" />
       </Helmet>
 
       <Navbar />
@@ -116,21 +135,10 @@ const LandingPage = () => {
           transition={{ duration: 1.2, ease: "easeOut" }}
         >
           <div className="bg-black bg-opacity-50 p-8 rounded-lg text-center w-[90%] max-w-3xl">
-            <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white font-serif leading-tight tracking-wide"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut", delay: 0.3 }}
-            >
+            <motion.h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white font-serif">
               Bartending Services in Halifax <br /> & Atlantic Canada
             </motion.h1>
-
-            <motion.h2
-              className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold text-gray-300 font-serif mt-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
-            >
+            <motion.h2 className="text-xl sm:text-2xl md:text-3xl text-gray-300 font-serif mt-4">
               Crafting unforgettable cocktails for weddings, parties, and private events.
             </motion.h2>
           </div>
@@ -151,52 +159,46 @@ const LandingPage = () => {
         <motion.form
           className="p-8 bg-white rounded-lg shadow-lg max-w-lg w-11/12 text-left space-y-6"
           onSubmit={sendEmail}
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          {/* Name */}
-          <label className="block text-gray-700 text-lg">
-            Name:
+          <label>Name:
             <input type="text" name="name" required className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
-          {/* Email */}
-          <label className="block text-gray-700 text-lg">
-            Email:
+          <label>Email:
             <input type="email" name="email" required className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
-          {/* Date */}
-          <label className="block text-gray-700 text-lg">
-            Event Date:
+          <label>Event Date:
             <input type="date" name="date" required className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
-          {/* Occasion */}
-          <label className="block text-gray-700 text-lg">
-            Occasion:
+          <label>Occasion:
             <input type="text" name="occasion" className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
-          {/* Service Hours */}
-          <label className="block text-gray-700 text-lg">
-            Hours of Bar Service:
-            <input type="number" name="barServiceHours" placeholder="e.g. 6" className="w-full p-3 border mt-2 rounded-md" />
+          <label>Hours of Bar Service:
+            <input type="text" name="barServiceHours" placeholder="e.g. 4PM-12AM" className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
-          {/* Guests */}
-          <label className="block text-gray-700 text-lg">
-            Number of Guests:
+          <label>Liquor Provider:
+            <input type="text" name="liquorProvider" className="w-full p-3 border mt-2 rounded-md" />
+          </label>
+
+          <label>Number of Guests:
             <input type="number" name="guests" required className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
-          {/* Bar Type */}
-          <label className="block text-gray-700 text-lg">
-            Bar Type:
+          <label>Location:
+            <input type="text" name="location" className="w-full p-3 border mt-2 rounded-md" />
+          </label>
+
+          <label>Budget:
+            <input type="text" name="budget" className="w-full p-3 border mt-2 rounded-md" />
+          </label>
+
+          <label>Bar Type:
             <div className="text-sm text-gray-500">Open means you pay, Cash means guests pay</div>
-            <div className="flex gap-4 mt-2 items-center">
+            <div className="flex gap-4 mt-2">
               <label>
                 <input type="radio" name="barType" value="Open Bar" required onChange={() => setBarType("Open Bar")} /> Open Bar
               </label>
@@ -206,10 +208,8 @@ const LandingPage = () => {
             </div>
           </label>
 
-          {/* Cocktail Selector */}
           {barType === "Open Bar" && (
-            <label className="block text-gray-700 text-lg">
-              Select Cocktails (choose at least one):
+            <label>Preferred Cocktails:
               <div className="mt-2 grid grid-cols-1 gap-2">
                 {cocktailOptions.map((cocktail) => (
                   <label key={cocktail} className="flex items-center">
@@ -217,7 +217,6 @@ const LandingPage = () => {
                       type="checkbox"
                       value={cocktail}
                       onChange={() => handleCocktailChange(cocktail)}
-                      required={selectedCocktails.length === 0}
                       className="mr-2"
                     />
                     {cocktail}
@@ -226,6 +225,26 @@ const LandingPage = () => {
               </div>
             </label>
           )}
+
+          <label>Preferred Spirits/Menu Ideas:
+            <input type="text" name="spirits" className="w-full p-3 border mt-2 rounded-md" />
+          </label>
+
+          <label>Beer/Wine Offerings:
+            <input type="text" name="beerWine" className="w-full p-3 border mt-2 rounded-md" />
+          </label>
+
+          <label>Do You Need Cups:
+            <input type="text" name="cupPreference" className="w-full p-3 border mt-2 rounded-md" />
+          </label>
+
+          <label>Allergies or Special Requests:
+            <input type="text" name="specialRequests" className="w-full p-3 border mt-2 rounded-md" />
+          </label>
+
+          <label>Heard About Us From:
+            <input type="text" name="referralSource" className="w-full p-3 border mt-2 rounded-md" />
+          </label>
 
           <button type="submit" className="bg-blue-900 text-white px-6 py-3 rounded-lg mt-4">
             Submit
