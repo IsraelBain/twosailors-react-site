@@ -7,6 +7,13 @@ import recipes from "../config/recipes.json";
 // Optional cost file. If missing, costing quietly disables.
 import sku from "../config/sku_prices.json";
 
+const num = (v, d = 0) => {
+    const n = Number.parseFloat(v);
+    return Number.isFinite(n) ? n : d;
+  };
+  console.log("[TwoSailors] quoteEngine v2.2 loaded");
+  
+
 function toCurrency(n) {
   return `$${Number(n || 0).toFixed(2)}`;
 }
@@ -80,36 +87,37 @@ export default function quoteEngine(formData) {
     }
   }
 
-  // ---- Labor / Fees ----
-  const bartenderCount = Math.max(1, Math.ceil(guests / 60));
-  const serviceHoursNum = Number(barServiceHours) || (pricing.minimum_hours || 3);
-  // Always add 1hr setup + 1hr teardown
-  const totalLaborHours = serviceHoursNum + 2;
+// ---- Labor / Fees ----
+const bartenderCount = Math.max(1, Math.ceil(num(guests) / 60));
+const serviceHoursNum = num(barServiceHours, pricing.minimum_hours || 3);
+// Always add 1hr setup + 1hr teardown
+const totalLaborHours = serviceHoursNum + 2;
 
-  const baseRate =
-    barType === "Open Bar" ? pricing.open_bar_rate : pricing.cash_bar_rate;
+const baseRate = (barType === "Open Bar")
+  ? num(pricing.open_bar_rate, 60)
+  : num(pricing.cash_bar_rate, 75);
 
-  const laborCost = baseRate * bartenderCount * totalLaborHours;
+const laborCost = baseRate * bartenderCount * totalLaborHours;
 
-  const prepCfg = pricing?.prep || {
-    enabled: true,
-    rate_per_hour: 30,
-    default_hours: { cash_bar: 2, open_bar: 3 },
-    max_hours: 3
-  };
+const prepCfg = pricing?.prep || {
+  enabled: true,
+  rate_per_hour: 30,
+  default_hours: { cash_bar: 2, open_bar: 3 },
+  max_hours: 3
+};
 
-  const prepHours = Math.min(
-    barType === "Open Bar"
-      ? (prepCfg.default_hours?.open_bar ?? 3)
-      : (prepCfg.default_hours?.cash_bar ?? 2),
-    (prepCfg.max_hours ?? 3)
-  );
-  const prepCost = prepCfg.enabled ? (prepCfg.rate_per_hour * prepHours) : 0;
+const prepHours = Math.min(
+  barType === "Open Bar"
+    ? num(prepCfg.default_hours?.open_bar, 3)
+    : num(prepCfg.default_hours?.cash_bar, 2),
+  num(prepCfg.max_hours, 3)
+);
+const prepCost = prepCfg.enabled ? (num(prepCfg.rate_per_hour, 30) * prepHours) : 0;
 
-  const fees =
-    (pricing.booking_fee || 0) +
-    (pricing.insurance_fee || 0) +
-    ((pricing.travel_rate_per_km || 0) * (Number(km) || 0));
+const fees =
+  num(pricing.booking_fee) +
+  num(pricing.insurance_fee) +
+  (num(pricing.travel_rate_per_km) * num(km));
 
   // ---- Product Math (Unified for Open/Cash) ----
   const need = {}; // normalized needs: "Vodka (oz)", "Coke (oz)", "Ice (lbs)", "Red Wine (750ml)" etc.

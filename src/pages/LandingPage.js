@@ -122,6 +122,15 @@ const LandingPage = () => {
 
     try {
       // INTERNAL-ONLY email to your template (same id you used before)
+            // (Optional but recommended) include these for transparency/debugging in the email
+      appendHidden(form, "wantsCocktails", wantsCocktails ? "Yes" : "No");
+      appendHidden(form, "crowdType", formDataObj.crowdType);
+      appendHidden(form, "drinksPerGuest", String(formDataObj.drinksPerGuest));
+
+      // Quick version stamp so you know which code ran
+      appendHidden(form, "generatorVersion", "LandingPage v2.2 / Engine v2.2");
+      console.log("[TwoSailors] LandingPage v2.2 submit", formDataObj);
+
       await emailjs.sendForm(
         "service_ds9yha8",
         "template_7rzxizn", // your current template id

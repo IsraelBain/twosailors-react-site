@@ -3,10 +3,9 @@
     "presets": {
       "wedding_40_35_25": { "beer": 0.40, "wine": 0.35, "cocktails": 0.25 },
       "heavy_cocktail":   { "beer": 0.20, "wine": 0.10, "cocktails": 0.70 },
-      "cash_bar":         { "beer": 0.33, "wine": 0.17, "cocktails": 0.50 },
-  
       "standard_lean_beer": { "beer": 0.25, "wine": 0.15, "cocktails": 0.60 },
-      "standard_beer_30":   { "beer": 0.30, "wine": 0.10, "cocktails": 0.60 }
+      "standard_beer_30":   { "beer": 0.30, "wine": 0.10, "cocktails": 0.60 },
+      "cash_bar": { "beer": 0.40, "wine": 0.30, "cocktails": 0.30 }
     }
   }
   

@@ -7,7 +7,8 @@
       "Tequila": "NSLC - Hornitos",
       "Triple Sec": "NSLC - Cointreau",
       "Coffee Liqueur": "Boatskeg Distilling - Two Sailors Coffee Liqueur",
-      "Rye": "NSLC - Canadian Club"
+      "Rye": "NSLC - Canadian Club",
+      "Angostura Bitters": "NSLC"
     },
     "wine": {
       "Red Wine (750ml)": "Lost Bell Winery - Baco Noir",
@@ -15,6 +16,7 @@
       "Prosecco (750ml)": "NSLC"
     },
     "beer": {
+      "Beer (cans)": "NSLC",
       "Good Robot Ultra": "Good Robot Brewing",
       "Painted Boat Lager": "Boatskeg Distilling",
       "Corona": "NSLC"
@@ -52,7 +54,8 @@
     },
     "other": {
       "Egg Whites": "Costco",
-      "Ice": "Costco"
+      "Ice": "Costco",
+      "Rimming Salt": "Costco"
     }
   }
   
