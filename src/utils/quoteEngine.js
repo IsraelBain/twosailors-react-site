@@ -21,6 +21,12 @@ const aliasMap = {
   "Prosecco": "Prosecco (750ml)"
 };
 
+// ✅ Guard against missing setup/teardown keys in pricing.json
+const safeSetup = (pricing && pricing.setup_teardown_hours_per_bartender)
+  ? pricing.setup_teardown_hours_per_bartender
+  : { before: 1, after: 1 };
+
+
 export default function quoteEngine(formData) {
   const {
     name = "",
@@ -52,18 +58,24 @@ export default function quoteEngine(formData) {
 
   const baseRate = barType === "Open Bar" ? pricing.open_bar_rate : pricing.cash_bar_rate;
 
-  const laborHours =
-    Number(serviceHoursNum) +
-    pricing.setup_teardown_hours_per_bartender.before +
-    pricing.setup_teardown_hours_per_bartender.after;
+    const laborHours =
+      Number(serviceHoursNum) +
+      Number(safeSetup.before || 0) +
+      Number(safeSetup.after || 0);
 
   const laborCost = baseRate * bartenderCount * laborHours;
 
-  const prepHours = Math.min(
-    barType === "Open Bar" ? pricing.prep.default_hours.open_bar : pricing.prep.default_hours.cash_bar,
-    pricing.prep.max_hours
-  );
-  const prepCost = pricing.prep.enabled ? (pricing.prep.rate_per_hour * prepHours) : 0;
+    const prepCfg = pricing?.prep || {
+        enabled: true,
+        rate_per_hour: 30,
+        default_hours: { cash_bar: 2, open_bar: 3 },
+        max_hours: 3,
+      };
+      const prepHours = Math.min(
+        barType === "Open Bar" ? prepCfg.default_hours.open_bar : prepCfg.default_hours.cash_bar,
+        prepCfg.max_hours
+      );
+      const prepCost = prepCfg.enabled ? (prepCfg.rate_per_hour * prepHours) : 0;
 
   const fees =
     pricing.booking_fee +

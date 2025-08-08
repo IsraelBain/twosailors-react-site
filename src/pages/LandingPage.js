@@ -52,7 +52,7 @@ const LandingPage = () => {
       email: form.email.value,
       date: form.date.value,
       occasion: form.occasion.value,
-      barServiceHours: form.barServiceHours.value,
+      barServiceHours: Number(form.barServiceHours.value || 0),
       liquorProvider: form.liquorProvider.value,
       guests: Number(form.guests.value || 0),
       location: form.location.value,
