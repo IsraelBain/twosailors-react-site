@@ -258,11 +258,18 @@ export default function quoteEngine(formData) {
 
     // Produce / fallback routing (covers Limes/Lemons/Oranges/Mint/Raspberries if not in suppliers)
     if (supplierName === "Other") {
-      if (["Limes", "Lemons", "Oranges", "Raspberries"].includes(item)) supplierName = "Costco";
-      if (item === "Mint (bunches)") supplierName = "Barjus";
-      if (item === "Rimming Salt") supplierName = "Costco";
-      if (item === "Angostura Bitters") supplierName = "NSLC";
-    }
+        // produce
+        if (["Limes", "Lemons", "Oranges", "Raspberries"].includes(item)) supplierName = "Costco";
+        if (item === "Mint (bunches)") supplierName = "Barjus";
+      
+        // bar staples
+        if (item === "Rimming Salt") supplierName = "Costco";
+        if (item === "Angostura Bitters") supplierName = "NSLC";
+        if (item === "Aperol") supplierName = "NSLC";
+      
+        // generic wine routing (until you split red/white)
+        if (item === "Wine (750ml)") supplierName = "Lost Bell Winery";
+      }
 
     pushOrder(supplierName, item, quantity, unit);
   });

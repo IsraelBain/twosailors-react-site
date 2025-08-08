@@ -180,8 +180,19 @@ const LandingPage = () => {
             <input type="text" name="barServiceHours" placeholder="e.g. 4PM-12AM" className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
+          {/* Liquor Provider (dropdown) */}
           <label>Liquor Provider:
-            <input type="text" name="liquorProvider" className="w-full p-3 border mt-2 rounded-md" />
+            <select
+              name="liquorProvider"
+              required
+              className="w-full p-3 border mt-2 rounded-md"
+              defaultValue=""
+            >
+              <option value="" disabled>Select an option</option>
+              <option value="Two Sailors">Two Sailors</option>
+              <option value="Client Will">Client Will</option>
+              <option value="Undecided">Undecided</option>
+            </select>
           </label>
 
           <label>Number of Guests:
