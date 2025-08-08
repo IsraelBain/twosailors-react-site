@@ -1,0 +1,16 @@
+{
+    "cash_bar_rate": 60,
+    "open_bar_rate": 75,
+    "booking_fee": 200,
+    "insurance_fee": 250,
+    "travel_rate_per_km": 0.98,
+    "setup_teardown_hours_per_bartender": { "before": 1, "after": 1 },
+    "minimum_hours": 3,
+    "prep": {
+      "enabled": true,
+      "rate_per_hour": 30,
+      "default_hours": { "cash_bar": 2, "open_bar": 3 },
+      "max_hours": 3
+    }
+  }
+  

@@ -1,0 +1,43 @@
+{
+    "spirits": {
+      "1_14L_bottle_oz": 38,
+      "750ml_bottle_oz": 25
+    },
+    "wine": {
+      "750ml_glasses_5oz": 5
+    },
+    "beer_cider": {
+      "can_355ml": 1,
+      "pint_keg_servings": 124
+    },
+    "juices_mixers": {
+      "Lime Juice (L)": 33.8,
+      "Lemon Juice (L)": 33.8,
+      "Orange Juice (L)": 33.8,
+      "Grapefruit Juice (L)": 33.8,
+      "Pineapple Juice (L)": 33.8,
+      "Soda Water (L)": 33.8,
+      "Tonic Water (L)": 33.8,
+      "Ginger Beer (L)": 33.8,
+      "Coke (L)": 33.8,
+      "Diet Coke (L)": 33.8,
+      "Ginger Ale (L)": 33.8,
+      "Sprite (L)": 33.8
+    },
+    "syrups": {
+      "1L_bottle_oz": 33.8
+    },
+    "garnish": {
+      "lime_wedges_per_lime": 8,
+      "lime_wheels_per_lime": 7,
+      "lemon_half_wheels_per_lemon": 12,
+      "orange_half_wheels_per_orange": 12,
+      "mint_leaves_per_bunch": 50,
+      "raspberries_per_box": 36
+    },
+    "other": {
+      "egg_white_carton_1kg_oz": 35,
+      "ice_lbs_per_guest": 1.5
+    }
+  }
+  

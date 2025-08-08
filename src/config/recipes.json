@@ -1,0 +1,75 @@
+{
+    "Margarita": {
+      "ingredients": {
+        "Tequila": { "unit": "oz", "qty": 1.5 },
+        "Triple Sec": { "unit": "oz", "qty": 0.5 },
+        "Lime Juice": { "unit": "oz", "qty": 1 },
+        "Salt Rim": { "unit": "each", "qty": 1 }
+      }
+    },
+    "Aperol Spritz": {
+      "ingredients": {
+        "Aperol": { "unit": "oz", "qty": 2 },
+        "Prosecco": { "unit": "oz", "qty": 3 },
+        "Soda Water": { "unit": "oz", "qty": 1 },
+        "Orange Slice": { "unit": "each", "qty": 1 }
+      }
+    },
+    "Mojito": {
+      "ingredients": {
+        "White Rum": { "unit": "oz", "qty": 2 },
+        "Lime Juice": { "unit": "oz", "qty": 1 },
+        "Simple Syrup": { "unit": "oz", "qty": 1 },
+        "Mint Leaves": { "unit": "each", "qty": 6 },
+        "Soda Water": { "unit": "oz", "qty": 2 }
+      }
+    },
+    "Tom Collins": {
+      "ingredients": {
+        "Gin": { "unit": "oz", "qty": 2 },
+        "Lemon Juice": { "unit": "oz", "qty": 1 },
+        "Simple Syrup": { "unit": "oz", "qty": 0.5 },
+        "Soda Water": { "unit": "oz", "qty": 2 }
+      }
+    },
+    "Moscow Mule": {
+      "ingredients": {
+        "Vodka": { "unit": "oz", "qty": 2 },
+        "Lime Juice": { "unit": "oz", "qty": 0.5 },
+        "Ginger Beer": { "unit": "oz", "qty": 4 }
+      }
+    },
+    "Raspberry Collins": {
+      "ingredients": {
+        "Vodka": { "unit": "oz", "qty": 2 },
+        "Lime Juice": { "unit": "oz", "qty": 0.75 },
+        "Raspberry Syrup": { "unit": "oz", "qty": 1 },
+        "Soda Water": { "unit": "oz", "qty": 2 },
+        "Raspberry": { "unit": "each", "qty": 3 }
+      }
+    },
+    "Dark and Stormy": {
+      "ingredients": {
+        "Dark Rum": { "unit": "oz", "qty": 2 },
+        "Ginger Beer": { "unit": "oz", "qty": 4 },
+        "Lime Wedge": { "unit": "each", "qty": 1 }
+      }
+    },
+    "Old Fashioned": {
+      "ingredients": {
+        "Bourbon": { "unit": "oz", "qty": 2 },
+        "Simple Syrup": { "unit": "oz", "qty": 0.25 },
+        "Angostura Bitters": { "unit": "dash", "qty": 2 },
+        "Orange Peel": { "unit": "each", "qty": 1 }
+      }
+    },
+    "Espresso Martini": {
+      "ingredients": {
+        "Vodka": { "unit": "oz", "qty": 1.5 },
+        "Coffee Liqueur": { "unit": "oz", "qty": 1 },
+        "Espresso": { "unit": "oz", "qty": 1 },
+        "Simple Syrup": { "unit": "oz", "qty": 0.5 }
+      }
+    }
+  }
+  

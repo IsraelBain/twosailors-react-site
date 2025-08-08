@@ -1,0 +1,9 @@
+{
+    "buffer": 0.15,
+    "presets": {
+      "standard_lean_beer": { "beer": 0.25, "wine": 0.15, "cocktails": 0.60 },
+      "standard_beer_30": { "beer": 0.30, "wine": 0.10, "cocktails": 0.60 },
+      "heavy_cocktail": { "beer": 0.20, "wine": 0.10, "cocktails": 0.70 }
+    }
+  }
+  

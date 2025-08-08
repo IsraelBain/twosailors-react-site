@@ -1,0 +1,58 @@
+{
+    "spirits": {
+      "Vodka": "Boatskeg Distilling",
+      "White Rum": "Boatskeg Distilling",
+      "Dark Rum": "Boatskeg Distilling",
+      "Gin": "Willing to Learn Gin",
+      "Tequila": "NSLC - Hornitos",
+      "Triple Sec": "NSLC - Cointreau",
+      "Coffee Liqueur": "Boatskeg Distilling - Two Sailors Coffee Liqueur",
+      "Rye": "NSLC - Canadian Club"
+    },
+    "wine": {
+      "Red Wine (750ml)": "Lost Bell Winery - Baco Noir",
+      "White Wine (750ml)": "Lost Bell Winery - Tidal Bay",
+      "Prosecco (750ml)": "NSLC"
+    },
+    "beer": {
+      "Good Robot Ultra": "Good Robot Brewing",
+      "Painted Boat Lager": "Boatskeg Distilling",
+      "Corona": "NSLC"
+    },
+    "cider": {
+      "Annapolis Cider": "Annapolis Cider Company"
+    },
+    "mixers": {
+      "Lime Juice": "Barjus",
+      "Lemon Juice": "Barjus",
+      "Orange Juice": "Costco",
+      "Grapefruit Juice": "Costco",
+      "Pineapple Juice": "Costco",
+      "Soda Water": "Costco",
+      "Tonic Water": "Costco",
+      "Ginger Beer": "Costco",
+      "Coke": "Costco",
+      "Diet Coke": "Costco",
+      "Ginger Ale": "Costco",
+      "Sprite": "Costco"
+    },
+    "syrups": {
+      "Simple Syrup": "Barjus",
+      "Raspberry Syrup": "Barjus",
+      "Spicy Syrup": "Barjus"
+    },
+    "garnish": {
+      "Lime Wedges": "Costco",
+      "Lime Wheels": "Costco",
+      "Lemon Wheels": "Costco",
+      "Orange Wheels": "Costco",
+      "Mint Leaves": "Barjus",
+      "Raspberries": "Costco",
+      "Orange Peel": "Costco"
+    },
+    "other": {
+      "Egg Whites": "Costco",
+      "Ice": "Costco"
+    }
+  }
+  

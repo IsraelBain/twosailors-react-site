@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet";
 import Navbar from "../components/Navbar";
@@ -7,13 +7,56 @@ import { useNavigate } from "react-router-dom";
 import emailjs from "@emailjs/browser";
 import backgroundImage from "../assets/back2back.jpg";
 import CoffeeLiqueurPopup from "../components/CoffeeLiqueurPopup";
-
+import quoteEngine from "../utils/quoteEngine";
 
 const LandingPage = () => {
   const navigate = useNavigate();
+  const [barType, setBarType] = useState("");
+  const [selectedCocktails, setSelectedCocktails] = useState([]);
+
+  const cocktailOptions = [
+    "Margarita",
+    "Aperol Spritz",
+    "Mojito",
+    "Tom Collins",
+    "Moscow Mule",
+    "Raspberry Collins",
+    "Dark and Stormy",
+    "Old Fashioned",
+    "Espresso Martini"
+  ];
+
+  const handleCocktailChange = (cocktail) => {
+    setSelectedCocktails((prev) =>
+      prev.includes(cocktail)
+        ? prev.filter((c) => c !== cocktail)
+        : [...prev, cocktail]
+    );
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
+
+    const formDataObj = {
+      name: e.target.name.value,
+      guests: Number(e.target.guests.value),
+      barType: e.target.barType.value,
+      cocktails: selectedCocktails,
+      serviceHours: parseFloat(e.target.barServiceHours.value) || 6,
+      drinksPerGuest: 3,
+      km: 0 // optional travel distance if you want to capture later
+    };
+
+    const quote = quoteEngine(formDataObj);
+    console.log("Quote Outputs:", quote);
+
+    // Append clientEmail as hidden field
+    const hiddenField = document.createElement("input");
+    hiddenField.type = "hidden";
+    hiddenField.name = "quoteDetails";
+    hiddenField.value = quote.clientEmail;
+    e.target.appendChild(hiddenField);
+
     emailjs
       .sendForm(
         "service_ds9yha8",
@@ -105,7 +148,6 @@ const LandingPage = () => {
           Send Us an Inquiry!
         </h2>
 
-        {/* Form Section with Smooth Fade-in & Scale Effect */}
         <motion.form
           className="p-8 bg-white rounded-lg shadow-lg max-w-lg w-11/12 text-left space-y-6"
           onSubmit={sendEmail}
@@ -114,184 +156,83 @@ const LandingPage = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
+          {/* Name */}
           <label className="block text-gray-700 text-lg">
             Name:
-            <input
-              type="text"
-              name="name"
-              placeholder="Your Name"
-              required
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
+            <input type="text" name="name" required className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
+          {/* Email */}
           <label className="block text-gray-700 text-lg">
             Email:
-            <input
-              type="email"
-              name="email"
-              placeholder="Your Email"
-              required
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
+            <input type="email" name="email" required className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
+          {/* Date */}
           <label className="block text-gray-700 text-lg">
             Event Date:
-            <input
-              type="date"
-              name="date"
-              required
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
+            <input type="date" name="date" required className="w-full p-3 border mt-2 rounded-md" />
           </label>
+
+          {/* Occasion */}
           <label className="block text-gray-700 text-lg">
             Occasion:
-            <input
-              type="text"
-              name="occasion"
-              placeholder="e.g. Wedding, Corporate Party, etc."
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
+            <input type="text" name="occasion" className="w-full p-3 border mt-2 rounded-md" />
           </label>
+
+          {/* Service Hours */}
           <label className="block text-gray-700 text-lg">
             Hours of Bar Service:
-            <textarea
-              name="barServiceHours"
-              placeholder="Specify the hours of bar service"
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
-          </label>
-          <label className="block text-gray-700 text-lg">
-            Who is providing the liquor?
-            <select
-              name="liquorProvider"
-              required
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            >
-              <option value="">Select an option</option>
-              <option value="Two Sailors">Two Sailors</option>
-              <option value="Client Will">Client Will</option>
-              <option value="Undecided">Undecided</option>
-            </select>
+            <input type="number" name="barServiceHours" placeholder="e.g. 6" className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
+          {/* Guests */}
           <label className="block text-gray-700 text-lg">
             Number of Guests:
-            <input
-              type="number"
-              name="guests"
-              placeholder="Approximate number of guests"
-              required
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
+            <input type="number" name="guests" required className="w-full p-3 border mt-2 rounded-md" />
           </label>
 
-          <label className="block text-gray-700 text-lg">
-            Location:
-            <input
-              type="text"
-              name="location"
-              placeholder="Event Location"
-              required
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
-          </label>
-
-          <label className="block text-gray-700 text-lg">
-            Budget:
-            <input
-              type="text"
-              name="budget"
-              placeholder="Estimated Budget"
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
-          </label>
-
+          {/* Bar Type */}
           <label className="block text-gray-700 text-lg">
             Bar Type:
-            <div className="text-sm text-gray-500">
-              Open means you pay, Cash means guests pay
-            </div>
+            <div className="text-sm text-gray-500">Open means you pay, Cash means guests pay</div>
             <div className="flex gap-4 mt-2 items-center">
-              <label className="flex items-center">
-                <input type="radio" name="barType" value="Open Bar" required className="mr-2" /> Open Bar
+              <label>
+                <input type="radio" name="barType" value="Open Bar" required onChange={() => setBarType("Open Bar")} /> Open Bar
               </label>
-              <label className="flex items-center">
-                <input type="radio" name="barType" value="Cash Bar" required className="mr-2" /> Cash Bar
+              <label>
+                <input type="radio" name="barType" value="Cash Bar" required onChange={() => setBarType("Cash Bar")} /> Cash Bar
               </label>
             </div>
           </label>
 
-          <label className="block text-gray-700 text-lg">
-            Preferred Spirits/Menu Ideas:
-            <textarea
-              name="spirits"
-              placeholder="Let us know your preferences!"
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
-          </label>
+          {/* Cocktail Selector */}
+          {barType === "Open Bar" && (
+            <label className="block text-gray-700 text-lg">
+              Select Cocktails (choose at least one):
+              <div className="mt-2 grid grid-cols-1 gap-2">
+                {cocktailOptions.map((cocktail) => (
+                  <label key={cocktail} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      value={cocktail}
+                      onChange={() => handleCocktailChange(cocktail)}
+                      required={selectedCocktails.length === 0}
+                      className="mr-2"
+                    />
+                    {cocktail}
+                  </label>
+                ))}
+              </div>
+            </label>
+          )}
 
-          <label className="block text-gray-700 text-lg">
-            Beer/Wine Offerings:
-            <textarea
-              name="beerWine"
-              placeholder="Table Wines and Bar Wines needed?"
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
-          </label>
-          <label className="block text-gray-700 text-lg">
-            Do you need Cups:
-            <textarea
-              name="specialRequests"
-              placeholder="Glass or Plastic?"
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
-          </label>
-
-          <label className="block text-gray-700 text-lg">
-            Allergies or Special Requests:
-            <textarea
-              name="cupPreference"
-              placeholder="Tell us about any special requests or allergies"
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
-          </label>
-          <label className="block text-gray-700 text-lg">
-            How did you hear about us?
-            <input
-              type="text"
-              name="referralSource"
-              placeholder="Instagram, Google, Friend, etc."
-              className="w-full p-3 border border-gray-300 rounded-md mt-2 focus:ring-2 focus:ring-blue-400 transition"
-            />
-          </label>
-
-          <button
-            type="submit"
-            className="bg-blue-900 text-white px-6 py-3 rounded-lg mt-4 hover:bg-blue-700 transition-all font-mont tracking-wider uppercase"
-          >
+          <button type="submit" className="bg-blue-900 text-white px-6 py-3 rounded-lg mt-4">
             Submit
           </button>
         </motion.form>
       </motion.main>
-            {/* Contact Us Section */}
-            <motion.section
-        className="bg-white py-12 px-6 text-center shadow-inner"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-      >
-        <h2 className="text-4xl font-serif font-semibold text-gray-800 mb-4">Contact Us</h2>
-        <p className="text-lg text-gray-600">Email: <a href="mailto:twosailorsco@gmail.com" className="text-blue-600 underline">twosailorsco@gmail.com</a></p>
-      </motion.section>
 
-      {/* Footer Section */}
-
-
-
-      {/* Footer Section */}
       <Footer />
     </div>
   );
