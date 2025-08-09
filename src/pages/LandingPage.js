@@ -18,7 +18,7 @@ const LandingPage = () => {
   const [placeLatLng, setPlaceLatLng] = useState(null); // { lat, lng }
   const [placeName, setPlaceName] = useState("");       // string shown in input
   const [locationError, setLocationError] = useState("");
-  const pacRef = useRef(null);
+  const locationInputRef = useRef(null);
   // no manual session token needed with the Autocomplete widget
 
   // Cocktail options
@@ -43,98 +43,69 @@ const LandingPage = () => {
   };
 
 
-  // Dynamically load Maps JS and the web component library
+  // Load Google Maps and initialize autocomplete
   useEffect(() => {
-    let cancelled = false;
-
-    const loadScript = (id, src) =>
-      new Promise((resolve, reject) => {
-        const existing = document.getElementById(id);
-        if (existing) {
-          existing.addEventListener("load", resolve, { once: true });
-          existing.addEventListener("error", reject, { once: true });
-          // If already loaded, resolve immediately
-          if (existing.getAttribute("data-loaded") === "true") resolve();
+    const loadGoogleMapsScript = () => {
+      return new Promise((resolve, reject) => {
+        if (window.google && window.google.maps && window.google.maps.places) {
+          resolve();
           return;
         }
-        const s = document.createElement("script");
-        s.id = id;
-        s.src = src;
-        s.async = true;
-        s.defer = true;
-        s.addEventListener("load", () => {
-          s.setAttribute("data-loaded", "true");
-          resolve();
-        }, { once: true });
-        s.addEventListener("error", reject, { once: true });
-        document.body.appendChild(s);
+        
+        const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+        if (!key) {
+          setLocationError("Location service configuration missing. Please contact support.");
+          reject(new Error("Missing API key"));
+          return;
+        }
+
+        const script = document.createElement("script");
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places&v=weekly`;
+        script.async = true;
+        script.defer = true;
+        script.onload = () => resolve();
+        script.onerror = () => {
+          setLocationError("Location services failed to load. Please check your connection.");
+          reject(new Error("Failed to load Google Maps"));
+        };
+        document.head.appendChild(script);
+      });
+    };
+
+    const initAutocomplete = () => {
+      const input = locationInputRef.current;
+      if (!input || !window.google || !window.google.maps || !window.google.maps.places) {
+        return;
+      }
+
+      const autocomplete = new window.google.maps.places.Autocomplete(input, {
+        fields: ["name", "formatted_address", "geometry"],
+        types: ["establishment", "geocode"]
       });
 
-    async function boot() {
-      try {
-        const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-        if (!key) throw new Error("Missing REACT_APP_GOOGLE_MAPS_API_KEY");
+      autocomplete.addListener("place_changed", () => {
+        const place = autocomplete.getPlace();
+        if (place && place.geometry && place.geometry.location) {
+          const lat = place.geometry.location.lat();
+          const lng = place.geometry.location.lng();
+          setPlaceLatLng({ lat, lng });
+          setPlaceName(place.formatted_address || place.name || "");
+          setLocationError("");
+        } else {
+          setPlaceLatLng(null);
+          setLocationError("Please select a suggested location.");
+        }
+      });
+    };
 
-        // 1) Maps JS (new Places model ships with &libraries=places)
-        await loadScript(
-          "google-maps-js",
-          `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places&v=weekly`
-        );
-
-        // 2) Extended component library (web components)
-        await loadScript(
-          "google-extended-components",
-          "https://unpkg.com/@googlemaps/extended-component-library@0.6/dist/index.min.js"
-        );
-
-        if (cancelled) return;
-
-        // Wire up the web component
-        const el = pacRef.current;
-        if (!el) return;
-
-        // Optional: placeholder via attribute API
-        el.setAttribute("placeholder", "Start typing address/venue…");
-
-        // Listen for selection
-        el.addEventListener("gmp-placeselect", async (evt) => {
-          try {
-            // evt.detail.place is a "Place" (new Places model)
-            const place = evt.detail?.place;
-            if (!place) throw new Error("No place");
-
-            // You must fetch fields explicitly in the new model
-            await place.fetchFields({
-              fields: ["location", "displayName", "formattedAddress"]
-            });
-
-            const loc = place.location; // may be LatLng or {lat,lng}
-            let lat, lng;
-            if (!loc) throw new Error("No location on place");
-
-            // Handle both LatLng and LatLngLiteral
-            lat = typeof loc.lat === "function" ? loc.lat() : loc.lat;
-            lng = typeof loc.lng === "function" ? loc.lng() : loc.lng;
-
-            setPlaceLatLng({ lat, lng });
-            setPlaceName(place.formattedAddress || place.displayName || "");
-            setLocationError("");
-          } catch (err) {
-            setPlaceLatLng(null);
-            setLocationError("Please select a suggested location.");
-          }
-        });
-
-        // Clear stale error once components are ready
+    loadGoogleMapsScript()
+      .then(() => {
+        initAutocomplete();
         setLocationError("");
-      } catch (err) {
-        console.error("[Places] boot error:", err);
-        setLocationError("Location services temporarily unavailable. Please try again.");
-      }
-    }
-
-    boot();
-    return () => { cancelled = true; };
+      })
+      .catch((error) => {
+        console.error("Google Maps loading error:", error);
+      });
   }, []);
 
   // Create-or-update hidden inputs (prevents duplicates)
@@ -158,7 +129,7 @@ const LandingPage = () => {
     const placesAvailable = !!window.google?.maps?.places;
     if (placesAvailable && !placeLatLng) {
       setLocationError("Please select a suggested location from the list.");
-      pacRef.current?.focus?.();
+      locationInputRef.current?.focus();
       return;
     }
 
@@ -408,15 +379,17 @@ const LandingPage = () => {
 
           <label>
             Location:
-            {/* Visible autocomplete element (web component) */}
-            <gmpx-place-autocomplete
-              ref={pacRef}
-              className="w-full p-3 border mt-2 rounded-md block"
-            ></gmpx-place-autocomplete>
-
-            {/* Hidden form value for EmailJS */}
-            <input type="hidden" name="location" value={placeName} />
-
+            <input
+              type="text"
+              name="location"
+              ref={locationInputRef}
+              value={placeName}
+              onChange={(e) => { setPlaceName(e.target.value); setPlaceLatLng(null); }}
+              placeholder="Start typing address/venue…"
+              className="w-full p-3 border mt-2 rounded-md"
+              autoComplete="off"
+              required
+            />
             {locationError && (
               <div className="text-xs text-red-600 mt-1">{locationError}</div>
             )}
