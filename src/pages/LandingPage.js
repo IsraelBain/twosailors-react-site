@@ -93,6 +93,20 @@ const LandingPage = () => {
     // Run the quote engine
     const quote = quoteEngine(formDataObj);
 
+    setHidden(form, "bookingFee", quote.bookingFee);
+    setHidden(form, "insuranceFee", quote.insuranceFee);
+    setHidden(form, "travelFee", quote.travelFee);
+    setHidden(form, "nonProductSubtotal", quote.nonProductSubtotal);
+
+    // NEW product split
+    setHidden(form, "productAlcoholPreTax", quote.productAlcoholPreTax);
+    setHidden(form, "productNonAlcoholPreTax", quote.productNonAlcoholPreTax);
+
+    // NEW grand total + polished blocks
+    setHidden(form, "grandTotal", quote.grandTotal);
+    setHidden(form, "costBreakdownHTML", quote.costBreakdownHTML);
+    setHidden(form, "clientQuoteHTML", quote.clientQuoteHTML);
+
     // Inject ONLY computed/internal fields (no duplicates of visible ones)
     setHidden(form, "cocktails", (formDataObj.cocktails || []).join(", "));
     setHidden(form, "laborCost", quote.laborCost);
@@ -115,7 +129,7 @@ const LandingPage = () => {
     setHidden(form, "wantsCocktails", wantsCocktails ? "Yes" : "No");
     setHidden(form, "crowdType", formDataObj.crowdType);
     setHidden(form, "drinksPerGuest", String(formDataObj.drinksPerGuest));
-    setHidden(form, "generatorVersion", "LandingPage v2.3 / Engine v2.2");
+    setHidden(form, "generatorVersion", "LandingPage v2.3 / Engine v2.4");
     console.log("[TwoSailors] LandingPage v2.3 submit", formDataObj);
 
     try {
