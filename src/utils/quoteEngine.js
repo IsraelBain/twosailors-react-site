@@ -1,4 +1,4 @@
-// utils/quoteEngine.js — v2.4
+// utils/quoteEngine.js — v2.4.1
 import pricing from "../config/pricing.json";
 import consumption from "../config/consumption.json";
 import suppliers from "../config/suppliers.json";

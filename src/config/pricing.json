@@ -5,7 +5,7 @@
   
     "booking_fee": 200,
     "insurance_fee": 200,
-    "travel_rate_per_km": 0.0,
+    "travel_rate_per_km": 0.98,
   
     "prep": {
       "enabled": true,

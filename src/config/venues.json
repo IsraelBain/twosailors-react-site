@@ -1,0 +1,9 @@
+{
+  "origin": { "name": "South End Halifax", "lat": 44.6366, "lng": -63.5859 },
+  "venues": [
+    { "name": "Hubbards Barn", "lat": 44.6419, "lng": -64.0668 },
+    { "name": "Mahone Bay", "lat": 44.4473, "lng": -64.3813 },
+    { "name": "Lunenburg", "lat": 44.3770, "lng": -64.3180 },
+    { "name": "Halifax (Downtown)", "lat": 44.6488, "lng": -63.5752 }
+  ]
+}
