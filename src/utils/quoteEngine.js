@@ -103,8 +103,8 @@ export default function quoteEngine(formData) {
   const serviceHoursNum = num(barServiceHours, pricing.minimum_hours || 3);
   const totalLaborHours = serviceHoursNum + 2; // +1 setup +1 teardown
   const baseRate = (barType === "Open Bar")
-    ? num(pricing.open_bar_rate, 60)
-    : num(pricing.cash_bar_rate, 75);
+    ? num(pricing.open_bar_rate, 75)
+    : num(pricing.cash_bar_rate, 60);
   const laborCost = baseRate * bartenderCount * totalLaborHours;
 
   const prepCfg = pricing?.prep || {
