@@ -1,6 +1,6 @@
 {
-    "open_bar_rate": 60,
-    "cash_bar_rate": 75,
+    "open_bar_rate": 75,
+    "cash_bar_rate": 60,
     "minimum_hours": 3,
   
     "booking_fee": 200,

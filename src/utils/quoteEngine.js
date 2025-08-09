@@ -21,6 +21,9 @@ function sumObj(map, key, add) {
 function ceil(n) {
   return Math.ceil(Number(n || 0));
 }
+function escapeHtml(text) {
+  return String(text || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]);
+}
 
 // Aliases to match supplier/SKU names
 const aliasMap = {
@@ -121,7 +124,7 @@ export default function quoteEngine(formData) {
 
   const bookingFee   = num(pricing.booking_fee, 200);
   const insuranceFee = num(pricing.insurance_fee, 200);
-  const travelFee    = num(pricing.travel_rate_per_km) * num(km);
+  const travelFee    = num(pricing?.travel_rate_per_km) * num(km);
 
   const fees = bookingFee + insuranceFee + travelFee; // kept for backward-compat
   const nonProductSubtotal = laborCost + prepCost + fees;
@@ -351,7 +354,7 @@ export default function quoteEngine(formData) {
       <tr><td>Prep (${prepHours} hr${prepHours===1?"":"s"} @ ${toCurrency(prepCfg.rate_per_hour||30)}/hr)</td><td style="text-align:right;">${toCurrency(prepCost)}</td></tr>
       <tr><td>Booking Fee</td><td style="text-align:right;">${toCurrency(bookingFee)}</td></tr>
       <tr><td>Insurance</td><td style="text-align:right;">${toCurrency(insuranceFee)}</td></tr>
-      <tr><td>Travel (${num(km)} km @ ${toCurrency(num(pricing.travel_rate_per_km))}/km)</td><td style="text-align:right;">${toCurrency(travelFee)}</td></tr>
+      <tr><td>Travel (${num(km)} km @ ${toCurrency(num(pricing?.travel_rate_per_km))}/km)</td><td style="text-align:right;">${toCurrency(travelFee)}</td></tr>
       <tr><td style="border-top:1px solid #ddd;"><strong>Service Subtotal</strong></td><td style="text-align:right;border-top:1px solid #ddd;"><strong>${toCurrency(nonProductSubtotal)}</strong></td></tr>
 
       <tr><td colspan="2" style="font-size:18px;font-weight:bold;padding-top:18px;">Product Costs (Estimated)</td></tr>
@@ -403,8 +406,8 @@ export default function quoteEngine(formData) {
   // Client-facing friendly block you can copy/paste
   const clientQuoteHTML = `
     <div style="font-family:Arial,sans-serif;line-height:1.5;">
-      <p>Hi ${name || "there"},</p>
-      <p>Thanks so much for reaching out and for sending your event details — we’d love to look after bartending for your ${occasion || "event"} on ${date || "(date TBC)"} in ${location || "your venue"}.</p>
+      <p>Hi ${escapeHtml(name) || "there"},</p>
+      <p>Thanks so much for reaching out and for sending your event details — we’d love to look after bartending for your ${escapeHtml(occasion) || "event"} on ${escapeHtml(date) || "(date TBC)"} in ${escapeHtml(location) || "your venue"}.</p>
 
       <p>Based on <strong>${guests}</strong> guests and an <strong>${barType}</strong> setup${wantsCocktails ? " with cocktails" : ""}, here’s a preliminary estimate:</p>
 
@@ -457,6 +460,7 @@ Two Sailors Bartending
     insuranceFee: insuranceFee.toFixed(2),
     travelFee: travelFee.toFixed(2),
     fees: (fees).toFixed(2), // legacy combined
+    totalCost: nonProductSubtotal.toFixed(2), // alias for nonProductSubtotal (legacy)
     nonProductSubtotal: nonProductSubtotal.toFixed(2),
 
     // Product costing split
