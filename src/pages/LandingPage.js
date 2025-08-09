@@ -56,24 +56,49 @@ const LandingPage = () => {
       const input = locationInputRef.current;
       if (!input) return;
       
-      const ac = new window.google.maps.places.Autocomplete(input, {
-        fields: ["name", "formatted_address", "geometry"],
-        types: ["establishment", "geocode"]
-      });
-      
-      ac.addListener("place_changed", () => {
-        const p = ac.getPlace();
-        if (p && p.geometry && p.geometry.location) {
-          const lat = p.geometry.location.lat();
-          const lng = p.geometry.location.lng();
-          setPlaceLatLng({ lat, lng });
-          setPlaceName(p.formatted_address || p.name || "");
-          setLocationError("");
-        } else {
-          setPlaceLatLng(null);
-          setLocationError("Please select a suggested location.");
-        }
-      });
+      // Try new PlaceAutocompleteElement first, fallback to legacy
+      if (window.google.maps.places.PlaceAutocompleteElement) {
+        const ac = new window.google.maps.places.PlaceAutocompleteElement({
+          fields: ["name", "formattedAddress", "geometry"],
+          types: ["establishment", "geocode"]
+        });
+        
+        input.parentNode.insertBefore(ac, input);
+        input.style.display = 'none';
+        
+        ac.addEventListener("gmp-placeselect", ({ place }) => {
+          if (place && place.geometry && place.geometry.location) {
+            const lat = place.geometry.location.lat();
+            const lng = place.geometry.location.lng();
+            setPlaceLatLng({ lat, lng });
+            setPlaceName(place.formattedAddress || place.name || "");
+            setLocationError("");
+          } else {
+            setPlaceLatLng(null);
+            setLocationError("Please select a suggested location.");
+          }
+        });
+      } else {
+        // Fallback to legacy Autocomplete
+        const ac = new window.google.maps.places.Autocomplete(input, {
+          fields: ["name", "formatted_address", "geometry"],
+          types: ["establishment", "geocode"]
+        });
+        
+        ac.addListener("place_changed", () => {
+          const p = ac.getPlace();
+          if (p && p.geometry && p.geometry.location) {
+            const lat = p.geometry.location.lat();
+            const lng = p.geometry.location.lng();
+            setPlaceLatLng({ lat, lng });
+            setPlaceName(p.formatted_address || p.name || "");
+            setLocationError("");
+          } else {
+            setPlaceLatLng(null);
+            setLocationError("Please select a suggested location.");
+          }
+        });
+      }
     }
 
     const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -103,7 +128,7 @@ const LandingPage = () => {
     script.id = "google-places-dyn";
     script.async = true;
     script.defer = true;
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places`;
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${key}&libraries=places&loading=async`;
     script.addEventListener("load", initAutocomplete);
     script.addEventListener("error", () => {
       setLocationError("Location services failed to load. Please check your connection.");
