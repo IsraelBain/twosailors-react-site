@@ -56,49 +56,25 @@ const LandingPage = () => {
       const input = locationInputRef.current;
       if (!input) return;
       
-      // Try new PlaceAutocompleteElement first, fallback to legacy
-      if (window.google.maps.places.PlaceAutocompleteElement) {
-        const ac = new window.google.maps.places.PlaceAutocompleteElement({
-          fields: ["name", "formattedAddress", "geometry"],
-          types: ["establishment", "geocode"]
-        });
-        
-        input.parentNode.insertBefore(ac, input);
-        input.style.display = 'none';
-        
-        ac.addEventListener("gmp-placeselect", ({ place }) => {
-          if (place && place.geometry && place.geometry.location) {
-            const lat = place.geometry.location.lat();
-            const lng = place.geometry.location.lng();
-            setPlaceLatLng({ lat, lng });
-            setPlaceName(place.formattedAddress || place.name || "");
-            setLocationError("");
-          } else {
-            setPlaceLatLng(null);
-            setLocationError("Please select a suggested location.");
-          }
-        });
-      } else {
-        // Fallback to legacy Autocomplete
-        const ac = new window.google.maps.places.Autocomplete(input, {
-          fields: ["name", "formatted_address", "geometry"],
-          types: ["establishment", "geocode"]
-        });
-        
-        ac.addListener("place_changed", () => {
-          const p = ac.getPlace();
-          if (p && p.geometry && p.geometry.location) {
-            const lat = p.geometry.location.lat();
-            const lng = p.geometry.location.lng();
-            setPlaceLatLng({ lat, lng });
-            setPlaceName(p.formatted_address || p.name || "");
-            setLocationError("");
-          } else {
-            setPlaceLatLng(null);
-            setLocationError("Please select a suggested location.");
-          }
-        });
-      }
+      // Use legacy Autocomplete since it's more widely supported
+      const ac = new window.google.maps.places.Autocomplete(input, {
+        fields: ["name", "formatted_address", "geometry"],
+        types: ["establishment", "geocode"]
+      });
+      
+      ac.addListener("place_changed", () => {
+        const p = ac.getPlace();
+        if (p && p.geometry && p.geometry.location) {
+          const lat = p.geometry.location.lat();
+          const lng = p.geometry.location.lng();
+          setPlaceLatLng({ lat, lng });
+          setPlaceName(p.formatted_address || p.name || "");
+          setLocationError("");
+        } else {
+          setPlaceLatLng(null);
+          setLocationError("Please select a suggested location.");
+        }
+      });
     }
 
     const key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
