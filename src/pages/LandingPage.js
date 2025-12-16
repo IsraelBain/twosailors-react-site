@@ -65,7 +65,7 @@ const LandingPage = () => {
     },
     {
       question: "What areas do you serve?",
-      answer: "We serve Halifax and all of Atlantic Canada. Travel fees apply for events outside the Halifax Regional Municipality based on distance."
+      answer: "We serve Halifax and can travel anywhere in Nova Scotia and New Brunswick. Travel fees apply for events outside the Halifax Regional Municipality based on distance."
     },
     {
       question: "Can you create custom cocktails for my event?",
@@ -356,7 +356,7 @@ const LandingPage = () => {
         {/* Hero Content */}
         <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
           <motion.h1
-            className="text-4xl sm:text-5xl md:text-7xl font-bold text-white font-serif mb-6 leading-tight"
+            className="text-3xl sm:text-5xl md:text-7xl font-bold text-white font-serif mb-6 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -400,7 +400,7 @@ const LandingPage = () => {
       {/* Trust Badges Section */}
       <section className="bg-navy-dark py-8">
         <div className="max-w-6xl mx-auto px-6">
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-white/90">
+          <div className="grid grid-cols-2 gap-6 md:flex md:flex-wrap md:justify-center md:items-center md:gap-16 text-white/90">
             <motion.div
               className="flex items-center gap-3"
               initial={{ opacity: 0, y: 20 }}
@@ -487,9 +487,9 @@ const LandingPage = () => {
 
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { step: "01", title: "Tell Us About Your Event", desc: "Fill out our quick form with your event details, and we'll craft a personalized quote within 24 hours." },
-              { step: "02", title: "Plan the Perfect Menu", desc: "We'll collaborate with you to create a custom cocktail menu that matches your vision and wow your guests." },
-              { step: "03", title: "Relax & Celebrate", desc: "On event day, we handle everything. You'll feel like a guest at your own party while we pour perfection." }
+              { step: "1", title: "Tell Us About Your Event", desc: "Fill out our quick form with your event details, and we'll craft a personalized quote within 24 hours." },
+              { step: "2", title: "Plan the Perfect Menu", desc: "We'll collaborate with you to create a menu that matches your vision and wows your guests." },
+              { step: "3", title: "Relax & Celebrate", desc: "On event day, we handle everything. You'll feel like a guest at your own party while we pour perfection." }
             ].map((item, i) => (
               <motion.div
                 key={i}
@@ -603,11 +603,11 @@ const LandingPage = () => {
           </motion.div>
 
           {/* Scrollable testimonials on mobile, grid on desktop */}
-          <div className="flex overflow-x-auto pb-4 gap-6 snap-x snap-mandatory md:grid md:grid-cols-3 md:overflow-visible scrollbar-hide">
+          <div className="flex overflow-x-auto pb-4 gap-4 snap-x snap-mandatory md:grid md:grid-cols-3 md:gap-6 md:overflow-visible scrollbar-hide px-2 -mx-2 md:px-0 md:mx-0">
             {testimonials.map((testimonial, i) => (
               <motion.div
                 key={i}
-                className="flex-shrink-0 w-80 md:w-auto bg-white rounded-2xl p-6 shadow-lg snap-center"
+                className="flex-shrink-0 w-[calc(100vw-4rem)] sm:w-80 md:w-auto bg-white rounded-2xl p-6 shadow-lg snap-center"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
