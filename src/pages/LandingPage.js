@@ -84,37 +84,43 @@ const LandingPage = () => {
   // Testimonials from Google Reviews - All 5-star ratings
   const testimonials = [
     {
-      name: "Casey Hogan",
+      name: "Casey",
+      year: "2025",
       event: "Wedding",
       rating: 5,
       text: "BEST. BARTENDERS. EVER. The drinks and service from Two Sailors were truly one of the highlights of our wedding day! From the quality and creativity of their cocktails, to the stunning presentation, everything was outstanding. Drew and Cam's energy was contagious — organized, attentive, and professional from start to finish!"
     },
     {
-      name: "Sam Ward",
+      name: "Sam",
+      year: "2025",
       event: "Wedding",
       rating: 5,
       text: "Cannot recommend these guys more highly. Fast, efficient, friendly, and made mean cocktails, including two signature cocktails concocted specifically for the occasion. The bar was busy all night but they never lost their cool. 10/10 service — you cannot go wrong hiring Two Sailors!"
     },
     {
-      name: "Trevor LeBlanc",
+      name: "Trevor",
+      year: "2025",
       event: "Event",
       rating: 5,
       text: "Two Sailors is one of the most genuine, talented, and fun wedding bartending groups. Affordable pricing, awesome vibes, and delicious drinks! Very professional and talented gents!"
     },
     {
       name: "Michael",
+      year: "2025",
       event: "Wedding",
       rating: 5,
       text: "I would highly recommend them! Quick to respond, provided help and recommendations for alcohol count, and arrived hassle-free. The espresso martini was a fan fav. Both Cam and Drew were a highlight amongst our guests. They went above and beyond!"
     },
     {
-      name: "Niva Sabeshan",
+      name: "Niva",
+      year: "2024",
       event: "Wedding",
       rating: 5,
       text: "Highly recommend - they know how to bring the energy and make phenomenal drinks!"
     },
     {
-      name: "Coltin Handrahan",
+      name: "Coltin",
+      year: "2025",
       event: "Event",
       rating: 5,
       text: "The Two Sailors team bring a great energy and professionalism to every event. Great guys, and very talented bartenders!"
@@ -620,7 +626,7 @@ const LandingPage = () => {
                 </div>
                 <p className="text-gray-700 text-base mb-4 italic leading-relaxed line-clamp-4">"{testimonial.text}"</p>
                 <div className="border-t pt-3">
-                  <p className="font-semibold text-navy-dark">{testimonial.name}</p>
+                  <p className="font-semibold text-navy-dark">{testimonial.name}, {testimonial.year}</p>
                   <p className="text-gray-500 text-sm">{testimonial.event}</p>
                 </div>
               </motion.div>
@@ -1061,6 +1067,24 @@ const LandingPage = () => {
           >
             Get Started Now
           </motion.a>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section className="py-8 bg-navy-dark">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 text-white">
+            <span className="text-gray-400">Questions? Reach out:</span>
+            <a
+              href="mailto:twosailorsco@gmail.com"
+              className="flex items-center gap-2 text-white hover:text-coral transition-colors font-medium"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              twosailorsco@gmail.com
+            </a>
+          </div>
         </div>
       </section>
 
