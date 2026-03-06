@@ -70,20 +70,12 @@ function getCategoryForItem(item) {
 export default function quoteEngine(formData) {
   const {
     name = "",
-    email = "",
     date = "",
     occasion = "",
     barServiceHours = 6, // number of service hours only
-    liquorProvider = "",
     guests = 0,
     location = "",
-    budget = "",
     barType = "Open Bar",
-    spirits = "",
-    beerWine = "",
-    cupPreference = "",
-    specialRequests = "",
-    referralSource = "",
     cocktails = [],
     drinksPerGuest = 6,
     crowdType: crowdTypeInput,

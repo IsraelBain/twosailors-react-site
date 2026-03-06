@@ -20,7 +20,7 @@ import applecock from "../assets/applecock.jpg";
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  const [barType, setBarType] = useState("");
+  const [, setBarType] = useState("");
   const [wantsCocktails, setWantsCocktails] = useState(false);
   const [selectedCocktails, setSelectedCocktails] = useState([]);
   const [placeLatLng, setPlaceLatLng] = useState(null);
