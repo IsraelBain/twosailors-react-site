@@ -3,9 +3,9 @@
   "name": "Two Sailors Bartending",
   "icons": [
     {
-      "src": "weblogo.jpeg",
+      "src": "favicon.png",
       "sizes": "any",
-      "type": "image/jpeg"
+      "type": "image/png"
     }
   ],
   "start_url": ".",
