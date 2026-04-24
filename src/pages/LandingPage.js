@@ -318,10 +318,10 @@ const LandingPage = () => {
 
     try {
       await emailjs.sendForm(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID,
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        "service_ds9yha8",
+        "template_7rzxizn",
         form,
-        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+        "8rp67ph2Lbxxkvc5a"
       );
       navigate("/thank-you");
     } catch (error) {
