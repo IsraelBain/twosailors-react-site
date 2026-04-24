@@ -116,7 +116,7 @@ export default function quoteEngine(formData) {
 
   const bookingFee   = num(pricing.booking_fee, 200);
   const insuranceFee = num(pricing.insurance_fee, 200);
-  const travelFee    = num(pricing?.travel_rate_per_km) * num(km);
+  const travelFee    = Math.max(20, num(pricing?.travel_rate_per_km) * num(km));
 
   const fees = bookingFee + insuranceFee + travelFee; // kept for backward-compat
   const nonProductSubtotal = laborCost + prepCost + fees;
